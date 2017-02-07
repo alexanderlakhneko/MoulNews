@@ -37,9 +37,62 @@
         <div id="page-bgtop">
             <div id="page-bgbtm">
                 <div id="content">
-                    <p>News List</p>
+                    <p>Content</p><br>
                     <div style="clear: both;">&nbsp;</div>
                 </div>
+                <!-- end #content -->
+                <div id="sidebar">
+                    <ul>
+                        <li>
+                            <h3>Назване товара</h3>
+                            <ul>
+                                <p>Цена</p>
+                                <li><a href="#">Ссылка на сайт</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h3>Назване товара</h3>
+                            <ul>
+                                <p>Цена</p>
+                                <li><a href="#">Ссылка на сайт</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h3>Назване товара</h3>
+                            <ul>
+                                <p>Цена</p>
+                                <li><a href="#">Ссылка на сайт</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="sidebar2">
+                    <ul>
+                        <li>
+                            <h3>Назване товара</h3>
+                            <ul>
+                                <p>Цена</p>
+                                <li><a href="#">Ссылка на сайт</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h3>Назване товара</h3>
+                            <ul>
+                                <p>Цена</p>
+                                <li><a href="#">Ссылка на сайт</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h3>Назване товара</h3>
+                            <ul>
+                                <p>Цена</p>
+                                <li><a href="#">Ссылка на сайт</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end #sidebar -->
                 <div style="clear: both;">&nbsp;</div>
             </div>
         </div>

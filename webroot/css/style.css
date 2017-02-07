@@ -229,15 +229,15 @@ img.aligncenter {
 
 #page-bgbtm {
 	margin: 0px;
-	padding: 40px 40px 0px 40px;
+	padding: 40px 80px 0px 40px;
 }
 
 /* Content */
 
 #content {
-	float: left;
+	float: right;
 	width: 800px;
-	padding: 0px 0px 0px 0px;
+	padding: 30px 0px 0px 0px;
 }
 
 .post {
@@ -285,66 +285,17 @@ img.aligncenter {
 }
 
 /* Sidebar */
+#sidebar2 {
+	position: absolute;
+	width: 280px;
+	left:1150px;
+	top:370px;
+}
 
 #sidebar {
 	float: right;
 	width: 280px;
 	padding: 30px 0px 0px 0px;
-}
-
-#sidebar ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-#sidebar li {
-	margin: 0;
-	padding: 0;
-}
-
-#sidebar li ul {
-	margin: 0px 15px;
-	padding-bottom: 30px;
-}
-
-#sidebar li li {
-	padding-left: 20px;
-	line-height: 35px;
-	background: url(images/img07.jpg) no-repeat left 14px;
-}
-
-#sidebar li li span {
-	display: block;
-	margin-top: -20px;
-	padding: 0;
-	font-size: 11px;
-	font-style: italic;
-}
-
-#sidebar h2 {
-	height: 38px;
-	margin-bottom: 20px;
-	padding: 12px 0 0 15px;
-	border-bottom: 1px solid #D9D9D9;
-	letter-spacing: -1px;
-	font-size: 24px;
-	color: #E42E33;
-}
-
-#sidebar p {
-	margin: 0 0px;
-	padding: 0px 20px 20px 20px;
-	text-align: justify;
-}
-
-#sidebar a {
-	border: none;
-	color: #737373;
-}
-
-#sidebar a:hover {
-	text-decoration: underline;
 }
 
 /* Calendar */
