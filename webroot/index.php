@@ -13,4 +13,5 @@ define('VENDOR_DIR', ROOT . 'vendor' . DS);
 
 require (VENDOR_DIR . 'autoload.php');
 
-echo 'test';
+include(VIEW_DIR . "default_layout.php");
+
