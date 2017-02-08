@@ -6,6 +6,7 @@ use Library\Request;
 use Library\DbConnection;
 use Library\RepositoryManager;
 use Library\Router;
+use Library\Container;
 
 
 ini_set('display_errors',1);
@@ -32,6 +33,12 @@ try{
     $repositoryManager = (new RepositoryManager())->setPDO($pdo);
 
     $router = new Router(CONFIG_DIR . 'routes.php');
+
+    $container = new Container();
+    $container->set('config', $config);
+    $container->set('database_connection', $pdo);
+    $container->set('repository_manager', $repositoryManager);
+    $container->set('router', $router);
     
     $router->match($request);
     $route = $router->getCurrentRoute();
@@ -40,6 +47,7 @@ try{
     $action = $route->action . 'Action';
 
     $controller = new $controller();
+    $controller->setContainer($container);
     
     if (!method_exists($controller, $action)) {
         throw new \Exception('Page not found', 404);
@@ -48,9 +56,7 @@ try{
     $content = $controller->$action($request);
 
 } catch (\Exception $e) {
-    $controller = new ErrorController();
-    $controller->setContainer($container);
-    $content = $controller->errorAction($request, $e);
+    echo $e->getMessage();
 }
 
 echo $content;

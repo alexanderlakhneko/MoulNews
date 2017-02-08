@@ -28,4 +28,11 @@ abstract class Controller
         
         return ob_get_clean();
     }
+
+    public function setContainer(Container $container)
+    {
+        $this->container = $container;
+
+        return $this;
+    }
 }
