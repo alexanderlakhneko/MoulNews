@@ -1,110 +1,240 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>News Modul 4</title>
-    <link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
-    <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen" />
-</head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Главная</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/css/price-range.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/responsive.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
 <body>
-<div id="menu-wrapper">
-    <div id="menu">
-        <ul>
-            <li class="current_page_item"><a href="#">Homepage</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-        </ul>
+
+
+
+<header id="header"><!--header-->
+    <div class="header_top"><!--header_top-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="contactinfo">
+                        <ul class="nav nav-pills">
+                            <li><a href="#"><i class="fa fa-phone"></i> +38 063 116 07 50</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> alexanderlakhneko@gmail.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="social-icons pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header_top-->
+
+    <div class="header-middle"><!--header-middle-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="logo pull-left">
+                        <a href="/"><img src="/images/home/logo.png" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="shop-menu pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/user/login"><i class="fa fa-lock"></i> Вход</a></li>
+                            <li><a href="/user/register"><i class="fa fa-lock"></i> Регистрация</a></li>
+                            <li><a href="/cabinet"><i class="fa fa-user"></i> Аккаунт</a></li>
+                            <li><a href="/user/logout"><i class="fa fa-unlock"></i> Выход</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header-middle-->
+
+    <div class="header-bottom"><!--header-bottom-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="mainmenu pull-left">
+                        <ul class="nav navbar-nav collapse navbar-collapse">
+                            <li><a href="/">Главная</a></li>
+                            <li class="dropdown"><a href="#">Магазин<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    <li ><a href="/catalog">Каталог товаров</a></li>
+                                    <li><a href="/cart">Корзина</a></li>
+                                    <li class="dropdown-submenu">
+                                        <a href="#">Выпадающее меню</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Сабменю 1</a></li>
+                                            <li><a href="#">Сабменю 2</a></li>
+                                            <li><a href="#">Сабменю 3</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="/about">О магазине</a></li>
+                            <li><a href="/contacts">Контакты</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header-bottom-->
+
+</header><!--/header-->
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    <h2>Товары со скидкой</h2>
+                    <div class="panel-group category-products">
+                        <?php //foreach ($Products->getProductList() as $productItem): ?>
+                        <div class="panel panel-default">
+                            <div>
+                                <h4 class="panel-title">
+                                    <a href="/category/<?php //echo $productItem['id']; ?>/page-1">
+                                        Сайт разработчика
+                                    </a>
+                                </h4>
+                                <h5>Название товара</h5>
+                                <h5>Цена</h5><br>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div>
+                                <h4 class="panel-title">
+                                    <a href="/category/<?php //echo $productItem['id']; ?>/page-1">
+                                        Сайт разработчика
+                                    </a>
+                                </h4>
+                                <h5>Название товара</h5>
+                                <h5>Цена</h5><br>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div>
+                                <h4 class="panel-title">
+                                    <a href="/category/<?php //echo $productItem['id']; ?>/page-1">
+                                        Сайт разработчика
+                                    </a>
+                                </h4>
+                                <h5>Название товара</h5>
+                                <h5>Цена</h5><br>
+                            </div>
+                        </div>
+
+                        <?php // endforeach; ?>
+                    </div>
+                </div>
+            </div>
+
+<div>
+    <?=$content ?>
+</div>
+<div class="col-sm-3">
+    <div class="left-sidebar right-sb">
+        <h2>Товары со скидкой</h2>
+        <div class="panel-group category-products">
+            <?php //foreach ($Products->getProductList() as $productItem): ?>
+            <div class="panel panel-default">
+                <div>
+                    <h4 class="panel-title">
+                        <a href="/category/<?php //echo $productItem['id']; ?>/page-1">
+                            Сайт разработчика
+                        </a>
+                    </h4>
+                    <h5>Название товара</h5>
+                    <h5>Цена</h5><br>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div>
+                    <h4 class="panel-title">
+                        <a href="/category/<?php //echo $productItem['id']; ?>/page-1">
+                            Сайт разработчика
+                        </a>
+                    </h4>
+                    <h5>Название товара</h5>
+                    <h5>Цена</h5><br>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div>
+                    <h4 class="panel-title">
+                        <a href="/category/<?php //echo $productItem['id']; ?>/page-1">
+                            Сайт разработчика
+                        </a>
+                    </h4>
+                    <h5>Название товара</h5>
+                    <h5>Цена</h5><br>
+                </div>
+            </div>
+
+            <?php // endforeach; ?>
+        </div>
     </div>
-    <!-- end #menu -->
 </div>
 
-<div id="wrapper">
-    <div id="header-wrapper">
-        <div id="header">
-            <div id="logo">
-                <h1>Странца новостей</h1>
-                <p>Добро пожаловать</p>
+    </div>
+
+</section>
+
+
+<footer id="footer" class="page-footer"><!--Footer-->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <p class="pull-left">Lakhneko © 2017</p>
+                <p class="pull-right">PHP News</p>
             </div>
         </div>
     </div>
-    <!-- end #header -->
-    <div id="page">
-        <div id="page-bgtop">
-            <div id="page-bgbtm">
-                <div id="content">
-                    <?php echo $content ?>
-                    <div style="clear: both;">&nbsp;</div>
-                </div>
-                <!-- end #content -->
-                <div id="sidebar">
-                    <ul>
-                        <li>
-                            <h3>Назване товара</h3>
-                            <ul>
-                                <p>Цена</p>
-                                <li><a href="#">Ссылка на сайт</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <h3>Назване товара</h3>
-                            <ul>
-                                <p>Цена</p>
-                                <li><a href="#">Ссылка на сайт</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <h3>Назване товара</h3>
-                            <ul>
-                                <p>Цена</p>
-                                <li><a href="#">Ссылка на сайт</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+</footer><!--/Footer-->
 
-                <div id="sidebar2">
-                    <ul>
-                        <li>
-                            <h3>Назване товара</h3>
-                            <ul>
-                                <p>Цена</p>
-                                <li><a href="#">Ссылка на сайт</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <h3>Назване товара</h3>
-                            <ul>
-                                <p>Цена</p>
-                                <li><a href="#">Ссылка на сайт</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <h3>Назване товара</h3>
-                            <ul>
-                                <p>Цена</p>
-                                <li><a href="#">Ссылка на сайт</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <!-- end #sidebar -->
-                <div style="clear: both;">&nbsp;</div>
-            </div>
-        </div>
-    </div>
-    <!-- end #page -->
-</div>
-<div id="footer">
-    <p>Alexander Lakhneko(c) 2017</p>
-</div>
-<!-- end #footer -->
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/jquery.cycle2.min.js"></script>
+<script src="/js/jquery.cycle2.carousel.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.scrollUp.min.js"></script>
+<script src="/js/price-range.js"></script>
+<script src="/js/jquery.prettyPhoto.js"></script>
+<script src="/js/main.js"></script>
+
 </body>
 </html>
-
-
-

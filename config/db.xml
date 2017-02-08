@@ -2,5 +2,5 @@
     <dbhost>localhost</dbhost>
     <dbuser>root</dbuser>
     <dbpass/>
-    <dbname>modulfour</dbname>
+    <dbname>modul</dbname>
 </db>
