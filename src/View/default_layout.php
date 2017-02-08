@@ -124,7 +124,8 @@
                     <div class="panel-group category-products">
                         <?php $a = 0?>
                         <?php foreach ($products as $productItem): ?>
-                        <div class="panel panel-default">
+                        <div class="panel panel-default" data-placement="right" data-toggle="tooltip"
+                             title="Купон на скидку-<?php echo md5(rand(0, 20)) ?> -Примените и получите 10% скидки">
                             <div>
                                 <h4 class="panel-title">
                                     <a href="<?php echo $productItem['site']; ?>">
@@ -132,7 +133,7 @@
                                     </a>
                                 </h4>
                                 <h5><?php echo $productItem['product_name']; ?></h5>
-                                <h5><?php echo $productItem['price']; ?></h5><br>
+                                <p>Price : <span><?php echo $productItem['price']; ?></span> грн.</p><br>
                             </div>
                         </div>
                         <?php $a++ ?>

@@ -28,3 +28,25 @@ $(document).ready(function(){
 		});
 	});
 });
+
+
+
+
+$('.panel').on({
+	mouseenter: function () {
+		var price = $(this).find('p > span');
+		price.html(price.html() * 0.9);
+		var currentFontSizeNum = parseFloat(price.css('fontSize'));
+		var newFontSize = currentFontSizeNum * 1.5;
+		price.css('fontSize', newFontSize);
+		(price.css('color', 'blue'));
+	},
+	mouseleave: function () {
+		var price = $(this).find('p > span');
+		price.html(price.html() / 0.9);
+		price.css('fontSize', '');
+		price.css('color', '');
+	}
+});
+
+

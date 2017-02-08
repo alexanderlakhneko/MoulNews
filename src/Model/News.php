@@ -71,21 +71,17 @@ class News extends EntityRepository
      * Возвращает список последних новостей
      * @return array <p>Массив с товарами</p>
      */
-    public function getRecommendedNews($page = 1)
+    public function getRecommendedNews()
     {
         //Отображение количества последних новостей на странице
-        $limit = 3;
-
-        // Смещение (для запроса)
-        $offset = ($page - 1) * $limit;
+        $limit = self::SHOW_BY_DEFAULT;
 
         // Получение и возврат результатов
-        $sql = 'SELECT id_news, title, img FROM news ORDER BY `date` LIMIT :limit OFFSET :offset';
+        $sql = 'SELECT id_news, title, img FROM news ORDER BY `date` LIMIT :limit';
         
         // Используется подготовленный запрос
         $result = $this->pdo->prepare($sql);
         $result->bindParam(':limit', $limit, \PDO::PARAM_INT);
-        $result->bindParam(':offset', $offset, \PDO::PARAM_INT);
         
         // Выполнение коменды
         $result->execute();

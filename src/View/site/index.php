@@ -22,6 +22,7 @@
                         <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="item active">
+                                    <?php $b = 0 ?>
                                     <?php foreach ($News->getRecommendedNews() as $categoryItem): ?>
                                         <div class="col-sm-4">
                                             <div class="product-image-wrapper">
@@ -33,20 +34,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <?php endforeach;?>
+                                    
+                                    <?php $b++ ?>
+                                    <?php if ($b == 3): ?> 
                                 </div>
                                 <div class="item">
-                                    <?php foreach ($News->getRecommendedNews(2) as $categoryItem): ?>
-                                        <div class="col-sm-4">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        <img src="/images/news/<?php echo $categoryItem['img'] ?>.jpg" alt="" />
-                                                        <p><a><?php echo $categoryItem['title'] ?></a></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <?php endif; ?>
                                     <?php endforeach;?>
                                 </div>
                             </div>
