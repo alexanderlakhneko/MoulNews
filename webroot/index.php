@@ -7,6 +7,7 @@ use Library\DbConnection;
 use Library\RepositoryManager;
 use Library\Router;
 use Library\Container;
+use Model\Product;
 
 
 ini_set('display_errors',1);
@@ -48,6 +49,8 @@ try{
 
     $controller = new $controller();
     $controller->setContainer($container);
+    
+    
     
     if (!method_exists($controller, $action)) {
         throw new \Exception('Page not found', 404);

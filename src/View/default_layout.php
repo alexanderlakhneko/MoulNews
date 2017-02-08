@@ -122,89 +122,34 @@
                 <div class="left-sidebar">
                     <h2>Товары со скидкой</h2>
                     <div class="panel-group category-products">
-                        <?php //foreach ($Products->getProductList() as $productItem): ?>
+                        <?php $a = 0?>
+                        <?php foreach ($products as $productItem): ?>
                         <div class="panel panel-default">
                             <div>
                                 <h4 class="panel-title">
-                                    <a href="/category/<?php //echo $productItem['id']; ?>/page-1">
-                                        Сайт разработчика
+                                    <a href="<?php echo $productItem['site']; ?>">
+                                        <?php echo $productItem['firm']; ?>
                                     </a>
                                 </h4>
-                                <h5>Название товара</h5>
-                                <h5>Цена</h5><br>
+                                <h5><?php echo $productItem['product_name']; ?></h5>
+                                <h5><?php echo $productItem['price']; ?></h5><br>
                             </div>
                         </div>
-                        <div class="panel panel-default">
-                            <div>
-                                <h4 class="panel-title">
-                                    <a href="/category/<?php //echo $productItem['id']; ?>/page-1">
-                                        Сайт разработчика
-                                    </a>
-                                </h4>
-                                <h5>Название товара</h5>
-                                <h5>Цена</h5><br>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div>
-                                <h4 class="panel-title">
-                                    <a href="/category/<?php //echo $productItem['id']; ?>/page-1">
-                                        Сайт разработчика
-                                    </a>
-                                </h4>
-                                <h5>Название товара</h5>
-                                <h5>Цена</h5><br>
-                            </div>
-                        </div>
-
-                        <?php // endforeach; ?>
+                        <?php $a++ ?>
+                        <?php if($a == 4):?>
                     </div>
                 </div>
             </div>
 
-<div>
-    <?=$content ?>
-</div>
-<div class="col-sm-3">
-    <div class="left-sidebar right-sb">
-        <h2>Товары со скидкой</h2>
-        <div class="panel-group category-products">
-            <?php //foreach ($Products->getProductList() as $productItem): ?>
-            <div class="panel panel-default">
-                <div>
-                    <h4 class="panel-title">
-                        <a href="/category/<?php //echo $productItem['id']; ?>/page-1">
-                            Сайт разработчика
-                        </a>
-                    </h4>
-                    <h5>Название товара</h5>
-                    <h5>Цена</h5><br>
-                </div>
+            <div>
+                <?=$content ?>
             </div>
-            <div class="panel panel-default">
-                <div>
-                    <h4 class="panel-title">
-                        <a href="/category/<?php //echo $productItem['id']; ?>/page-1">
-                            Сайт разработчика
-                        </a>
-                    </h4>
-                    <h5>Название товара</h5>
-                    <h5>Цена</h5><br>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div>
-                    <h4 class="panel-title">
-                        <a href="/category/<?php //echo $productItem['id']; ?>/page-1">
-                            Сайт разработчика
-                        </a>
-                    </h4>
-                    <h5>Название товара</h5>
-                    <h5>Цена</h5><br>
-                </div>
-            </div>
-
-            <?php // endforeach; ?>
+            <div class="col-sm-3">
+                <div class="left-sidebar right-sb">
+                    <h2>Товары со скидкой</h2>
+                    <div class="panel-group category-products">
+                    <?php endif; ?>
+                        <?php endforeach; ?>
         </div>
     </div>
 </div>

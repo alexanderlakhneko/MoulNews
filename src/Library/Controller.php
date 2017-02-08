@@ -23,6 +23,9 @@ abstract class Controller
         require VIEW_DIR . $classname . DS . $view;
         $content = ob_get_clean();
 
+        $product = $this->container->get('repository_manager')->getRepository('Product');
+        $products = $product->getProducts();
+        
         ob_start();
         require VIEW_DIR . self::$layout;
         

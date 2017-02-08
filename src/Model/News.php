@@ -4,8 +4,6 @@ namespace Model;
 
 use Library\EntityRepository;
 
-
-
 class News extends EntityRepository
 {
     // Количество отображаемых новостей по умолчанию на главной транице
@@ -20,7 +18,7 @@ class News extends EntityRepository
     {
         // Запрос к БД
         $result = $this->pdo->query('SELECT category_id, category_name FROM category ORDER BY category_name ASC');
-
+        
         // Получение и возврат результатов
         $i = 0;
         $categoryList = array();
@@ -40,9 +38,7 @@ class News extends EntityRepository
     {
         // Смещение (для запроса)
         $offset = ($page - 1) * $limit;
-
-
-
+        
         // Текст запроса к БД
         $sql = 'SELECT id_news, title FROM news '
             . 'WHERE category_id = :category_id '
@@ -108,6 +104,6 @@ class News extends EntityRepository
 
         return $news;
     }
-
+    
 }
 
