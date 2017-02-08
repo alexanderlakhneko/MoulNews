@@ -49,4 +49,13 @@ $('.panel').on({
 	}
 });
 
+$(document).ready(function () {
+    $(window).on('beforeunload', function () {
+        return true;
+    });
+
+    $('a').click(function () {
+        $(window).off('beforeunload');
+    });
+});
 
