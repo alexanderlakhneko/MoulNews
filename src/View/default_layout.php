@@ -37,7 +37,7 @@
         <div id="page-bgtop">
             <div id="page-bgbtm">
                 <div id="content">
-                    <p>Content</p><br>
+                    <?php echo $content ?>
                     <div style="clear: both;">&nbsp;</div>
                 </div>
                 <!-- end #content -->
