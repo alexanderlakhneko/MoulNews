@@ -12,7 +12,7 @@ return  array(
     //Страница новости
     'news_page' => new Route('/news/{id}', 'News', 'show', array('id' => '[0-9]+') ),
     //Страница новости по тегам
-    'tags_page' => new Route('/tags/{id}', 'Tags', 'show', array('id' => '[0-9]+') ),
+    'tags_page' => new Route('/tags/{id}/page-{st}', 'Tags', 'show', array('id' => '[0-9]+', 'st' => '[0-9]+') ),
 
     'Search' => new Route('/search', 'Tags', 'search' ),
 );

@@ -59,12 +59,18 @@ class Tags extends EntityRepository
         return $tags;
     }
 
-    public function getNewsByTag($id)
+    public function getNewsByTag($id , $page = 1, $limit = News::SHOW_BY_DEFAULT)
     {
-        $sql = "SELECT news.id_news, news.title FROM news JOIN tag_news ON tag_news.id_news = news.id_news WHERE tag_news.id_tag = :id";
+        // Смещение (для запроса)
+        $offset = ($page - 1) * $limit;
+        
+        $sql = "SELECT news.id_news, news.title FROM news JOIN tag_news ON tag_news.id_news = news.id_news WHERE tag_news.id_tag = :id 
+                LIMIT :limit OFFSET :offset";
 
         $result = $this->pdo->prepare($sql);
         $result->bindParam(':id', $id, \PDO::PARAM_INT);
+        $result->bindParam(':limit', $limit, \PDO::PARAM_INT);
+        $result->bindParam(':offset', $offset, \PDO::PARAM_INT);
 
         // Указываем, что хотим получить данные в виде массива
         $result->setFetchMode(\PDO::FETCH_ASSOC);
@@ -83,5 +89,24 @@ class Tags extends EntityRepository
         }
 
         return $news;
+    }
+
+    public function getTotalNewsInTag($id)
+    {
+        // Текст запроса к БД
+        $sql = "SELECT count(news.id_news) AS `count` FROM news JOIN tag_news ON tag_news.id_news = news.id_news WHERE tag_news.id_tag = :id";
+        
+        // Используется подготовленный запрос
+        $result = $this->pdo->prepare($sql);
+        $result->bindParam(':id', $id, \PDO::PARAM_INT);
+
+        // Выполнение коменды
+        $result->execute();
+
+
+        // Возвращаем значение count - количество
+        $row = $result->fetch();
+
+        return $row['count'];
     }
 }
