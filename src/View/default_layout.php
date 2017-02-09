@@ -13,10 +13,11 @@
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
     <link href="/css/responsive.css" rel="stylesheet">
-
+    
     <!--[if lt IE 9]>
     <script src="/js/html5shiv.js"></script>
     <script src="/js/respond.min.js"></script>
+    <script  src="/js/jquery-1.7.2.min.js" ></script>
     <![endif]-->
     <link rel="shortcut icon" href="/images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/apple-touch-icon-144-precomposed.png">
@@ -27,7 +28,28 @@
 
 <body>
 
+<div id="popup">
+    <form id="contact_form" role="form" method="post" action="/php/order.php">
+        <h3>Подпишитесь на новую разсылку</h3>
+        <input type="text" name="name" placeholder="Имя">
+        <input type="text" name="email" placeholder="Email">
+        <a href="#" id="close" class="btn button form_submit">Отказаться</a>
+        <a href="#" id="close" class="btn button form_submit">Подписаться</a>
+    </form>
+</div>
+
 <header id="header"><!--header-->
+    <form action="#" method="post" name="search" onsubmit="return false;"
+          class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+            <div class="btn-group">
+                <input type="text" autocomplete="off" id="search" data-toggle="dropdown" class="form-control"
+                       placeholder="search by tags"> </input>
+                <ul id="resSearch" class="dropdown-menu">
+                </ul>
+            </div>
+        </div>
+    </form>
     <div class="header_top"><!--header_top-->
         <div class="container">
             <div class="row">
@@ -39,14 +61,6 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="social-icons pull-right">
-                        <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </div><!--/header_top-->
@@ -54,11 +68,6 @@
     <div class="header-middle"><!--header-middle-->
         <div class="container">
             <div class="row">
-                <div class="col-sm-4">
-                    <div class="logo pull-left">
-                        <a href="/"><img src="/images/home/logo.png" alt="" /></a>
-                    </div>
-                </div>
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
@@ -71,6 +80,7 @@
                 </div>
             </div>
         </div>
+
     </div><!--/header-middle-->
 
     <div class="header-bottom"><!--header-bottom-->
@@ -141,7 +151,11 @@
             </div>
 
             <div>
+                <div class="col-sm-6 padding-right">
+                    <div class="features_items">
                 <?=$content ?>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-3">
                 <div class="left-sidebar right-sb">
@@ -172,8 +186,6 @@
 
 
 <script src="/js/jquery.js"></script>
-<script src="/js/jquery.cycle2.min.js"></script>
-<script src="/js/jquery.cycle2.carousel.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jquery.scrollUp.min.js"></script>
 <script src="/js/price-range.js"></script>

@@ -23,7 +23,7 @@ $(document).ready(function(){
 	        scrollText: '<i class="fa fa-angle-up"></i>', // Text for element, can contain HTML
 	        scrollTitle: false, // Set a custom <a> title if required.
 	        scrollImg: false, // Set true to use image
-	        activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+	        activeOverlay: false, // Set CSS color to display scrollUp active point,
 	        zIndex: 2147483647 // Z-Index for the overlay
 		});
 	});
@@ -49,13 +49,93 @@ $('.panel').on({
 	}
 });
 
-$(document).ready(function () {
-    $(window).on('beforeunload', function () {
-        return true;
-    });
 
-    $('a').click(function () {
-        $(window).off('beforeunload');
-    });
+
+// =========================================================================  go_order
+
+// //фкнкция вызова формы обратной связи
+// $('#callback').click(function(){
+// 	//появление окна обратной связи
+// 	$('#popup').fadeIn();
+// 	//добавляем к окну иконку закрытия
+// 	$('#popup').append('<a id="popup_close"></a>');
+// 	//расчитываем высоту и ширину всплывающего окна что бы вывести окно прямо по центру экрана
+// 	q_width = $('#popup').outerWidth()/-2;
+// 	q_height = $('#popup').outerHeight()/-2;
+// 	$('#popup').css({
+// 		'margin-left': q_width,
+// 		'margin-top': q_height
+// 	});
+// 	//выводим затемение страницы и делаем полупрозрачным
+// 	$('body').append('<div id="fade"></div>');
+// 	$('#fade').css({'filter' : 'alpha(opacity=40)'}).fadeIn();
+// 	return false;
+// });
+//
+// //функция закрытия окна
+// $('#close').click(function(){
+// 	//появление окна обратной связи
+// 	$('#popup').fadeOut();
+// 	//выводим затемение страницы и делаем полупрозрачным
+// 	$('body').append('<div id="fade"></div>');
+// 	$('#fade').css({'filter' : 'alpha(opacity=40)'}).fadeOut();
+// 	return false;
+// });
+
+
+
+$(document).on("ready", function (){
+	//появление окна обратной связи
+	$('#popup').delay( 15000 ).fadeIn();
+	//добавляем к окну иконку закрытия
+	$('#popup').append('<a id="popup_close"></a>');
+	//расчитываем высоту и ширину всплывающего окна что бы вывести окно прямо по центру экрана
+	q_width = $('#popup').outerWidth()/-2;
+	q_height = $('#popup').outerHeight()/-2;
+	$('#popup').css({
+		'margin-left': q_width,
+		'margin-top': q_height
+	});
+	//выводим затемение страницы и делаем полупрозрачным
+	$('body').delay( 15000 ).append('<div id="fade"></div>');
+	$('#fade').delay( 15000 ).css({'filter' : 'alpha(opacity=40)'}).fadeIn();
+	return false;
 });
+
+//функция закрытия окна
+$('#close').click(function(){
+	//появление окна обратной связи
+	$('#popup').fadeOut();
+	//выводим затемение страницы и делаем полупрозрачным
+	$('body').append('<div id="fade"></div>');
+	$('#fade').css({'filter' : 'alpha(opacity=40)'}).fadeOut();
+
+});
+
+	$(window).on('beforeunload', function () {
+		return true;
+	});
+
+	$('a').click(function () {
+		$(window).off('beforeunload');
+	});
+
+$(function(){
+	$("#search").keyup(function(){
+		var search = $("#search").val();
+		$.ajax({
+			type: "POST",
+			url: "/search",
+			data: {"search": search},
+			cache: false,
+			success: function(response){
+				$("#resSearch").html(response);
+			}
+		});
+		return false;
+	});
+});
+
+
+
 
