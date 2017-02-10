@@ -1,3 +1,6 @@
+<?php
+use Model\User;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,10 +74,13 @@
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="/user/login"><i class="fa fa-lock"></i> Вход</a></li>
-                            <li><a href="/user/register"><i class="fa fa-lock"></i> Регистрация</a></li>
-                            <li><a href="/cabinet"><i class="fa fa-user"></i> Аккаунт</a></li>
-                            <li><a href="/user/logout"><i class="fa fa-unlock"></i> Выход</a></li>
+                            <?php if (User::isGuest()): ?>
+                                <li><a href="/user/login"><i class="fa fa-lock"></i> Вход</a></li>
+                                <li><a href="/user/register"><i class="fa fa-lock"></i> Регистрация</a></li>
+                            <?php else: ?>
+                                <li><a href="/cabinet"><i class="fa fa-user"></i> Аккаунт</a></li>
+                                <li><a href="/user/logout"><i class="fa fa-unlock"></i> Выход</a></li>
+                            <?php endif; ?>
                         </ul>
                     </div>
                 </div>
@@ -98,10 +104,10 @@
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
                             <li><a href="/">Главная</a></li>
-                            <li class="dropdown"><a href="#">Магазин<i class="fa fa-angle-down"></i></a>
+                            <li class="dropdown"><a href="#">Меню<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li ><a href="/catalog">Каталог товаров</a></li>
-                                    <li><a href="/cart">Корзина</a></li>
+                                    <li ><a href="#">Меню 1</a></li>
+                                    <li><a href="#">Меню 2</a></li>
                                     <li class="dropdown-submenu">
                                         <a href="#">Выпадающее меню</a>
                                         <ul class="dropdown-menu">
@@ -112,7 +118,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="/about">О магазине</a></li>
+                            <li><a href="/searchNews">Поиск новостей</a></li>
                             <li><a href="/contacts">Контакты</a></li>
                         </ul>
                     </div>

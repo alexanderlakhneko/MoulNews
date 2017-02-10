@@ -109,4 +109,22 @@ class Tags extends EntityRepository
 
         return $row['count'];
     }
+
+    public function getTagsList()
+    {
+        // Запрос к БД
+        $result = $this->pdo->query('SELECT tag_name, id_tag FROM tags');
+
+        $tags = array();
+        $i = 0;
+
+        while ($row = $result->fetch()) {
+            $tags[$i]['tag_name'] = $row['tag_name'];
+            $tags[$i]['id_tag'] = $row['id_tag'];
+
+            $i++;
+        }
+
+        return $tags;
+    }
 }

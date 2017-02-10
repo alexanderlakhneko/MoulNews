@@ -15,6 +15,12 @@ return  array(
     'tags_page' => new Route('/tags/{id}/page-{st}', 'Tags', 'show', array('id' => '[0-9]+', 'st' => '[0-9]+') ),
 
     'Search' => new Route('/search', 'Tags', 'search' ),
+    'SearchNews' => new Route('/searchNews', 'Search', 'searchNews' ),
+    // Пользователь:
+    'user_reg' => new Route('/user/register', 'User', 'register'),
+    'user_login' => new Route('/user/login', 'User', 'login'),
+    'user_logout' => new Route('/user/logout', 'User', 'logout'),
+    'cabinet' => new Route('/cabinet', 'Cabinet', 'index'),
 );
 
 

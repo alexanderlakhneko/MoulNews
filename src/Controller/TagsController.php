@@ -12,7 +12,6 @@ class TagsController extends Controller
 {
     public function showAction(Request $request)
     {
-//        $news = $this->container->get('repository_manager')->getRepository('News');
         $tags = $this->container->get('repository_manager')->getRepository('Tags');
 
         $total = $tags->getTotalNewsInTag($request->get('id'));
@@ -39,4 +38,5 @@ class TagsController extends Controller
         
         include VIEW_DIR . 'Search' . DS . 'Show.php';
     }
+    
 }
