@@ -36,10 +36,10 @@ use Model\User;
 <div id="popup">
     <form id="contact_form" role="form" method="post" action="/php/order.php">
         <h3>Подпишитесь на новую разсылку</h3>
-        <input type="text" name="name" placeholder="Имя">
-        <input type="text" name="email" placeholder="Email">
-        <a href="#" id="close" class="btn button form_submit">Отказаться</a>
-        <a href="#" id="close" class="btn button form_submit">Подписаться</a>
+        <input type="" class="navbar-header" name="name" placeholder="Имя">
+        <input type="email" class="navbar-header" name="email" placeholder="Email"><br>
+        <a href="#" id="close" class="btn button form_submit reject-subscription">Отказаться</a>
+        <a href="#" id="close2" class="btn button form_submit">Подписаться</a>
     </form>
 </div>
 

@@ -188,7 +188,7 @@ left join news n on n.id_news=c.id_news";
         $this->pdo->query($sql);
 
         $result = $this->get_comments($id_news);
-
+       
         return $result;
     }
 

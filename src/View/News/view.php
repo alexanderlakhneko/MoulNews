@@ -36,6 +36,7 @@
     function array_rec($comment, $level = 0)
     {
         static $result;
+        $result .= '<div id="huita_here"></div>';
         foreach ($comment as $item => $value) {
             if ($level == 1) {
                 $result .= "<div class='panel panel2 panel-info' style='margin-left: 80px;'>";
