@@ -1,5 +1,6 @@
 <?php
 use Model\User;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +45,7 @@ use Model\User;
 </div>
 
 
-<header id="header"><!--header-->
+<header id="header" ><!--header-->
     <form action="#" method="post" name="search" onsubmit="return false;"
           class="navbar-form navbar-right" role="search">
         <div class="form-group">
@@ -56,7 +57,7 @@ use Model\User;
             </div>
         </div>
     </form>
-    <div class="header_top"><!--header_top-->
+    <div class="header_top" style="background-color: <?php echo $color['head']?>"><!--header_top-->
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
@@ -132,11 +133,11 @@ use Model\User;
 
 </header><!--/header-->
 
-<section>
+<section style="background-color: <?php echo $color['body']?>">
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <div class="left-sidebar">
+                <div>
                     <h2>Товары со скидкой</h2>
                     <div class="panel-group category-products">
                         <?php $a = 0?>
@@ -162,12 +163,13 @@ use Model\User;
             <div>
                 <div class="col-sm-6 padding-right">
                     <div class="features_items">
+                        <br>
                 <?=$content ?>
                     </div>
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="left-sidebar right-sb">
+                <div >
                     <h2>Товары со скидкой</h2>
                     <div class="panel-group category-products">
                     <?php endif; ?>

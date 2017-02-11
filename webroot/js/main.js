@@ -159,15 +159,17 @@ $(document).ready(function () {
 			var $cnt = parseInt($('.badge').text());
 			$('.badge').html($cnt + 1);
 			var data = $(data);
-			
+
 			  $('.panel2').remove();
 			$('#comment_form textarea').val('');
-		
+
 			$('#comment_form').after(data);
 		}
 		);
 	});
 });
+
+
 
 $(document).on('click', '.panel-footer #answer', function () {
 	var panel_info = $(this).closest('.panel2');

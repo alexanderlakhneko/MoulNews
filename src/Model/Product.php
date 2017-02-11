@@ -10,7 +10,7 @@ class Product extends EntityRepository
     {
 //         Запрос к БД
 
-        $result = $this->pdo->query('SELECT product_name, price, site, firm FROM promotion');
+        $result = $this->pdo->query('SELECT product_name, price, site, firm FROM promotion WHERE `is_active` = 1');
 
         // Получение и возврат результатов
         $i = 0;

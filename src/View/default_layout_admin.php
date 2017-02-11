@@ -52,21 +52,13 @@
 
         <div class="page-buffer"></div>
 </div>
-
-<div>
+<div class="col-sm-3">
+    </div>
+<div class="col-sm-6 padding-center">
     <?=$content ?>
 </div>
 
-<footer id="footer" class="page-footer"><!--Footer-->
-    <div class="footer-bottom">
-        <div class="container">
-            <div class="row">
-                <p class="pull-left">Lakhneko © 2017</p>
-                <p class="pull-right">PHP News</p>
-            </div>
-        </div>
-    </div>
-</footer><!--/Footer-->
+
 
 
 

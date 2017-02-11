@@ -26,6 +26,7 @@ return  array(
     // Админпанель:
     'admin' => new Route('/admin/index', 'Admin', 'index'),
     'default_admin' => new Route('/admin', 'Admin', 'index'),
+    'admin_oolor' => new Route('/admin/color', 'AdminColor', 'index'),
     
 );
 

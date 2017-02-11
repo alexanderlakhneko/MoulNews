@@ -25,6 +25,8 @@ abstract class Controller
 
         $product = $this->container->get('repository_manager')->getRepository('Product');
         $products = $product->getProducts();
+        $Admin = $this->container->get('repository_manager')->getRepository('Admin');
+        $color = $Admin->admin_color();
         
         ob_start();
         require VIEW_DIR . self::$layout;
