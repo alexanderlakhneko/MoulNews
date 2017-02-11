@@ -54,7 +54,7 @@ class Router
         }
     }
     
-    public function redirect($to)
+    public static function redirect($to)
     {
         header('Location: ' . $to);
         die;
