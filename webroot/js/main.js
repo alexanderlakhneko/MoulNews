@@ -102,7 +102,7 @@ $(document).on("ready", function (){
 	return false;
 });
 
-//функция закрытия окна
+
 $('#close').click(function(){
 	//появление окна обратной связи
 	$('#popup').fadeOut();
@@ -112,6 +112,7 @@ $('#close').click(function(){
 
 });
 
+//функция закрытия окна
 	$(window).on('beforeunload', function () {
 		return true;
 	});
@@ -136,6 +137,101 @@ $(function(){
 	});
 });
 
+
+
+$(document).ready(function () {
+	$("#comment_form").submit(function (event) {
+
+		event.preventDefault();
+		var $form = $(this).prev();
+		var id_parent = $form.find('#id_comment').val();
+		if(id_parent == undefined){
+			id_parent = 0;
+		}
+		var id_news = $(this).find('#id_news').val();
+		var comment = $(this).find('textarea').val();
+
+		$.post("/ajax/list", {comment: comment, id_parent: id_parent, id_news: id_news},
+		function (data) {
+			var $cnt = parseInt($('.badge').text());
+			$('.badge').html($cnt + 1);
+			var data = $(data);
+			var elements = $('.panel2');
+			 $('.panel2').remove();
+			$('#comment_form textarea').val('');
+			var comments = '';
+
+			elements.each(function (index) {
+				comments += ( elements.get(index).outerHTML );
+			});
+			$('#comment_form').after(comments);
+		}
+			//  , 'json'
+		);
+	});
+});
+
+$(document).on('click', '.panel-footer #answer', function () {
+	var panel_info = $(this).closest('.panel2');
+	$(panel_info).after($('#comment_form'));
+	$("button:reset").click(function () {
+		$('.panel2').eq(0).before($('#comment_form'));
+	});
+});
+
+$(document).ready(function () {
+	$(document).on('click', 'button#like', function () {
+		setVote('like', $(this));
+	});
+
+	$(document).on('click', 'button#dislike', function () {
+		setVote('dislike', $(this));
+	});
+
+});
+
+
+// type - тип голоса. Лайк или дизлайк
+// element - кнопка, по которой кликнули
+function setVote(type, element) {
+	// получение данных из полей
+	//var id_user = $('#id_user').val();
+	var temp = element.parent();
+
+	var id_comment = temp.find('#id_comment').val();
+
+	var id_parent = temp.find('#id_parent').val();
+
+	$.ajax({
+		// метод отправки
+		type: "POST",
+		// путь до скрипта-обработчика
+		url: "/ajax/list",
+		// какие данные будут переданы
+		data: {
+			'id_comment': id_comment,
+			'type': type
+		},
+
+		// тип передачи данных
+		dataType: "json",
+		// действие, при ответе с сервера
+		success: function (data) {
+
+			// в случае, когда пришло success. Отработало без ошибок
+			if (data.result == 'success') {
+				// Выводим сообщение
+				alert('Голос засчитан');
+				// увеличим визуальный счетчик
+				var count = parseInt(element.find('span').html());
+				element.find('span').html(count + 1);
+			} else {
+				// вывод сообщения об ошибке
+				alert(data.result);
+			}
+		}
+	});
+}
 
 
 
