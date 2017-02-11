@@ -21,6 +21,9 @@ return  array(
     'user_login' => new Route('/user/login', 'User', 'login'),
     'user_logout' => new Route('/user/logout', 'User', 'logout'),
     'cabinet' => new Route('/cabinet', 'Cabinet', 'index'),
+
+    'licks' => new Route('/ajax/list', 'News', 'listlickes'),
+    
 );
 
 
