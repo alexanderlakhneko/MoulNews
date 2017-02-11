@@ -57,10 +57,14 @@ class NewsController extends Controller
             $id_news = $request->post('id_news');
             $id_parent = $request->post('id_parent') ? $request->post('id_parent') : 0;
             $data['comments'] = $comment->add_comment(Session::get('user'), $id_news, $request->post('comment'), $id_parent);
-             $result = '';
-            $level2 = 0;
+            // $result = '';
+            $comment = $data['comments'];
+
+            function array_rec($comment, $level2 = 0){
+                static $result;
+                $level2 = 0;
                 $result .= '<div class="empty_placeholder"></div>';
-                foreach ( $data['comments'] as $item => $value) {
+                foreach ( $comment as $item => $value) {
                     if ($level2 == 1) {
                         $result .= "<div class='panel panel2 panel-info' style='margin-left: 80px;'>";
                     } else {
@@ -89,8 +93,10 @@ class NewsController extends Controller
                      </button>";
                     $result .= "</div></div></div>";
                     if (isset($value['childs'])) {
+
 //                $result.="</div>";
                         $level2++;
+
                         array_rec($value['childs'], $level2);
 
                         $level2 = 0;
@@ -99,11 +105,11 @@ class NewsController extends Controller
                     }
                 }
                 return $result;
+            }
 
-
+            return array_rec($comment);
 
         }
-
-
+        
     }
 }

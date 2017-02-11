@@ -103,7 +103,7 @@ $(document).on("ready", function (){
 });
 
 
-$('#close').click(function(){
+$('#close, #close2').click(function(){
 	//появление окна обратной связи
 	$('#popup').fadeOut();
 	//выводим затемение страницы и делаем полупрозрачным
@@ -117,8 +117,11 @@ $('#close').click(function(){
 		return true;
 	});
 
-	$('a').click(function () {
-		$(window).off('beforeunload');
+	$('a').click(function (selector) {
+
+		if (!($(selector.target).hasClass('reject-subscription'))) {
+			$(window).off('beforeunload');
+		}
 	});
 
 $(function(){
@@ -156,17 +159,12 @@ $(document).ready(function () {
 			var $cnt = parseInt($('.badge').text());
 			$('.badge').html($cnt + 1);
 			var data = $(data);
-			var elements = $('.panel2');
-			 $('.panel2').remove();
+			
+			  $('.panel2').remove();
 			$('#comment_form textarea').val('');
-			var comments = '';
-
-			elements.each(function (index) {
-				comments += ( elements.get(index).outerHTML );
-			});
-			$('#comment_form').after(comments);
+		
+			$('#comment_form').after(data);
 		}
-			//  , 'json'
 		);
 	});
 });

@@ -11,7 +11,7 @@
 <div>
     Теги:
     <?php foreach($tags as $tag): ?>
-     <a href="/tags/<?php echo $tag['id_tag'] ?>/page-1"><?php echo $tag['tag_name'] . ', ';?></a>
+     <a href="/tags/<?php echo $tag['id_tag'] ?>/page-1" class="label label-default"><?php echo $tag['tag_name'] ;?></a>
     <?php endforeach; ?>
 </div>
 
@@ -68,6 +68,7 @@
             if (isset($value['childs'])) {
 //                $result.="</div>";
                 $level++;
+                
                 array_rec($value['childs'], $level);
 
                 $level = 0;

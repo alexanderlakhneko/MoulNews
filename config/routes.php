@@ -23,6 +23,9 @@ return  array(
     'cabinet' => new Route('/cabinet', 'Cabinet', 'index'),
 
     'licks' => new Route('/ajax/list', 'News', 'listlickes'),
+    // Админпанель:
+    'admin' => new Route('/admin/index', 'Admin', 'index'),
+    'default_admin' => new Route('/admin', 'Admin', 'index'),
     
 );
 

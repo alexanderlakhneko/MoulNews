@@ -35,13 +35,14 @@ use Model\User;
 
 <div id="popup">
     <form id="contact_form" role="form" method="post" action="/php/order.php">
+        <button type="button"  id="close2" class="close" aria-hidden="true">&times;</button>
         <h3>Подпишитесь на новую разсылку</h3>
-        <input type="" class="navbar-header" name="name" placeholder="Имя">
-        <input type="email" class="navbar-header" name="email" placeholder="Email"><br>
-        <a href="#" id="close" class="btn button form_submit reject-subscription">Отказаться</a>
-        <a href="#" id="close2" class="btn button form_submit">Подписаться</a>
+        <input type="" class="form-control" name="name" placeholder="Имя">
+        <input type="email" class="form-control" name="email" placeholder="Email"><br>
+        <a href="#" id="close" class="btn button btn-default form_submit reject-subscription">Подписаться</a>
     </form>
 </div>
+
 
 <header id="header"><!--header-->
     <form action="#" method="post" name="search" onsubmit="return false;"
