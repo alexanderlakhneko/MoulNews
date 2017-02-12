@@ -5,27 +5,23 @@ namespace Controller;
 use Library\Request;
 use Library\Router;
 
-/**
- * Контроллер AdminProductController
- * Управление товарами в админпанели
- */
-class AdminProductController extends AdminBase
-{
 
+class AdminTagsController extends AdminBase
+{
     /**
-     * Action для страницы "Управление товарами"
+     * Action для страницы "Управление тегами"
      */
     public function indexAction()
     {
         // Проверка доступа
         $this->checkAdmin();
-        $product = $this->container->get('repository_manager')->getRepository('Product');
+        $tags = $this->container->get('repository_manager')->getRepository('Tags');
 
         // Получаем список товаров
-        $productsList = $product->getProducts();
+        $tagsList = $tags->getTagsList();
 
         // Подключаем вид
-        return $this->render('index.php', ['productsList' => $productsList]);
+        return $this->render('index.php', ['tagsList' => $tagsList]);
     }
 
     /**
@@ -36,28 +32,18 @@ class AdminProductController extends AdminBase
         // Проверка доступа
         $this->checkAdmin();
 
-        $products = $this->container->get('repository_manager')->getRepository('Product');
-
-
+        $tags = $this->container->get('repository_manager')->getRepository('Tags');
 
         // Обработка формы
         if ($request->isPost()) {
             // Если форма отправлена
             // Получаем данные из формы
-            $options['product_name'] = $request->post('product_name');
-            $options['price'] = $request->post('price');
-            $options['firm'] = $request->post('firm');
-            $options['site'] = $request->post('site');
-            $options['is_active'] = $request->post('is_active');
-
-            if ($products->createProduct($options)){
+            $tag_name = $request->post('tag_name');
+            if($tags->createTag($tag_name)){
                 // Перенаправляем пользователя на страницу управлениями товарами
-                Router::redirect("/admin/product");
-            };
-
-
-
+                Router::redirect("/admin/tags");
             }
+        }
 
         // Подключаем вид
         return $this->render('create.php');
@@ -70,37 +56,31 @@ class AdminProductController extends AdminBase
     {
         // Проверка доступа
         $this->checkAdmin();
-        
+
         $id = $request->get('id');
-        
-        $products = $this->container->get('repository_manager')->getRepository('Product');
-        
+
+        $tags = $this->container->get('repository_manager')->getRepository('Tags');
+
         // Получаем данные о конкретном заказе
-        $product = $products->getProductsById($id);
-        
+        $tag = $tags->getTagById($id);
+
 
         // Обработка формы
         if ($request->isPost()) {
             // Если форма отправлена
             // Получаем данные из формы
-            $options['product_name'] = $request->post('product_name');
-            $options['price'] = $request->post('price');
-            $options['firm'] = $request->post('firm');
-            $options['site'] = $request->post('site');
 
+            $tag_name = $request->post('tag_name');
             // Сохраняем изменения
-            if ($products->updateProductById($id, $options)) {
+            if ($tags->updateTagById($id, $tag_name)) {
 
                 // Перенаправляем пользователя на страницу управлениями товарами
-                Router::redirect("/admin/product");
+                Router::redirect("/admin/tags");
             }
-
-            
-            
         }
 
         // Подключаем вид
-        return $this->render('update.php', ['products' => $products, 'product' => $product, 'id' => $id,]);
+        return $this->render('update.php', ['tag' => $tag['tag_name']]);
     }
 
     /**
@@ -110,7 +90,7 @@ class AdminProductController extends AdminBase
     {
         // Проверка доступа
         $this->checkAdmin();
-        $product = $this->container->get('repository_manager')->getRepository('Product');
+        $tags = $this->container->get('repository_manager')->getRepository('Tags');
 
         $id = $request->get('id');
 
@@ -118,15 +98,14 @@ class AdminProductController extends AdminBase
         if ($request->isPost()) {
             // Если форма отправлена
             // Удаляем товар
-            $product->deleteProductById($id);
+            $tags->deleteTagById($id);
 
             // Перенаправляем пользователя на страницу управлениями товарами
-            Router::redirect("/admin/product");
+            Router::redirect("/admin/tags");
         }
 
         // Подключаем вид
         return $this->render('delete.php', ['id' => $id]);
 
     }
-
 }

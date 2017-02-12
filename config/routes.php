@@ -32,7 +32,12 @@ return  array(
     'admin_product_delete' => new Route('/admin/product/delete/{id}', 'AdminProduct', 'delete', array('id' => '[0-9]+')),
     'admin_product_update' => new Route('/admin/product/update/{id}', 'AdminProduct', 'update', array('id' => '[0-9]+')),
     'admin_product_create' => new Route('/admin/product/create', 'AdminProduct', 'create'),
-    
+    // Управление тегами:
+    'admin_tags' => new Route('/admin/tags', 'AdminTags', 'index'),
+    'admin_tags_delete' => new Route('/admin/tags/delete/{id}', 'AdminTags', 'delete', array('id' => '[0-9]+')),
+    'admin_tags_update' => new Route('/admin/tags/update/{id}', 'AdminTags', 'update', array('id' => '[0-9]+')),
+    'admin_tags_create' => new Route('/admin/tags/create', 'AdminTags', 'create'),
+
 );
 
 

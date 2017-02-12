@@ -127,4 +127,65 @@ class Tags extends EntityRepository
 
         return $tags;
     }
+
+    public function deleteTagById($id_tag)
+    {
+        // Текст запроса к БД
+        $sql = 'DELETE FROM tags WHERE id_tag = :id_tag';
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $this->pdo->prepare($sql);
+        $result->bindParam(':id_tag', $id_tag, \PDO::PARAM_INT);
+        return $result->execute();
+    }
+
+
+    public function updateTagById($id_tag, $tag_name)
+    {
+        // Текст запроса к БД
+        
+        $sql = "UPDATE tags SET tag_name = :tag_name WHERE id_tag = :id_tag";
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $this->pdo->prepare($sql);
+        $result->bindParam(':id_tag', $id_tag, \PDO::PARAM_INT);
+        $result->bindParam(':tag_name', $tag_name, \PDO::PARAM_INT);
+
+        return $result->execute();
+    }
+
+
+    public function createTag($tag_name)
+    {
+        // Текст запроса к БД
+        $sql = 'INSERT INTO tags (tag_name) VALUES (:tag_name)';
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $this->pdo->prepare($sql);
+        $result->bindParam(':tag_name', $tag_name, \PDO::PARAM_INT);
+        if ($result->execute()) {
+            // Если запрос выполенен успешно, возвращаем id добавленной записи
+            return $this->pdo->lastInsertId();
+        }
+        // Иначе возвращаем 0
+        return 0;
+    }
+
+    public function getTagById($id_tag)
+    {
+//         Запрос к БД
+
+        $sql = 'SELECT tag_name FROM tags  WHERE id_tag = :id_tag';
+
+        // Получение и возврат результатов
+
+        $Products = array();
+        $result = $this->pdo->prepare($sql);
+        $result->bindParam(':id_tag', $id_tag, \PDO::PARAM_INT);
+        $result->execute();
+
+        $row = $result->fetch(); 
+       
+        return $row;
+    }
 }

@@ -283,4 +283,6 @@ class News extends EntityRepository
         
         return $content;
     }
+    
+    
 }
