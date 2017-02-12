@@ -47,6 +47,49 @@
         </a>
     </div>
 
+<div>
+    <h2>Топ 5 самых активных пользователей:</h2>
+    <table class="table table-striped"  width="400px">
+        <thead>
+        <tr>
+            <th>№</th>
+            <th>Name:</th>
+            <th>Count comments:</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php $i=1;foreach ($data['commentator'] as $commentator): ?>
+            <tr>
+                <td><?=$i++?></td>
+                <td><a href="/comments/<?=$commentator['id_user']?>/page-1"><?=$commentator['name']?></a></td>
+                <td><?=$commentator['cnt']?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <h2>Топ 3 самые обсуждаемые темы:</h2>
+    <table class="table table-striped"  width="400px">
+        <thead>
+        <tr>
+            <th>№</th>
+            <th>Name:</th>
+            <th>Last date:</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php $i=1;foreach ($data['themes'] as $theme): ?>
+            <tr>
+                <td><?=$i++?></td>
+                <td><a href="/news/<?=$theme['id_news']?>"><?=$theme['title']?></a></td>
+                <td><?=$theme['datet']?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+
+
 
 
 

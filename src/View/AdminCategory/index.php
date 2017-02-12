@@ -19,6 +19,8 @@
     <tr>
         <th>ID категории</th>
         <th>Название категории</th>
+        <th></th>
+        <th></th>
     </tr>
     <?php foreach ($CategoriesList as $category): ?>
         <tr>

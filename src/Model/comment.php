@@ -17,6 +17,12 @@ class Comment extends EntityRepository
 
         return $result;
     }
+    public function admin_edit_comment($id){
+        $sql="select * from comments where id_comment={$id}";
+        $row = $this->pdo->query($sql);
+
+        return $row->fetch();
+    }
 
     public function get_comments($id_news)
     {
@@ -38,37 +44,13 @@ class Comment extends EntityRepository
         return $results;
     }
     
-    public function cnt_comments($limit=10){
+    public function cnt_comments(){
             $sql = "select count(*) as COUNT from comments";
-            if (Session::get('user') != 'admin') {
-                $sql .= "where is_published=1";
-            }
             $count_news = $this->pdo->query($sql);
-            $total_rows = ($count_news[0]['COUNT']);
-            $num_pages = ceil($total_rows / $limit);
-            return $num_pages;
-    }
-    
-    public function admin_get_comments($page = 0, $limit = 10)
-    {
-        $start = $page * $limit;
-        $sql="select c.id_comment,c.id_parent,u.name,n.title_news,cat.category_name, c.`comment`,c.date_time,c.cnt_like,c.cnt_dislike,c.is_active from comments c
-            left join users u on u.id=c.id_user
-            left join news n on n.id_news=c.id_news
-            left join category cat on cat.category_id=n.category_id order by c.date_time desc limit {$start},{$limit}";
-        $result = $this->pdo->query($sql);
-        $result['count']=$this->cnt_comments($limit);
-        return $result;
-    }
+            $row = $count_news->fetch();
+            $total_rows = ($row['COUNT']);
 
-    public function admin_delete_comment($id){
-        $sql="delete from comments where id_comment={$id}";
-        $this->pdo->query($sql);
-    }
-
-    public function admin_edit_comment($id){
-        $sql="select * from comments where id_comment={$id}";
-        return $this->pdo->query($sql);
+            return $total_rows;
     }
 
     public function top_commentators($limit = 5)
@@ -80,17 +62,18 @@ class Comment extends EntityRepository
         return $this->pdo->query($sql);
     }
 
-    public function getCommentCnt($id_user, $limit)
+    public function getCommentCnt($id_user)
     {
         $sql = "select count(*) as cnt from comments where id_user={$id_user}";
-        $cnt_pages = $this->pdo->query($sql);
-        $result = ceil($cnt_pages[0]['cnt'] / $limit);
-        return $result;
+        $result = $this->pdo->query($sql);
+        $row = $result->fetch();
+        return $row;
     }
 
     public function getThemes($limit = 3)
     {
-        $sql = "select c.*,n.title_news from (select max(date_time) datet,id_news from comments 
+
+        $sql = "select c.*,n.title from (select max(date_time) datet,id_news from comments 
 group by id_news limit {$limit}) c
 left join news n on n.id_news=c.id_news";
         return $this->pdo->query($sql);
@@ -99,14 +82,37 @@ left join news n on n.id_news=c.id_news";
 
     public function getCommentsByUser($id_user, $page = 0, $limit = 5)
     {
-        $page = $page * $limit;
-        $sql = "select c.*,n.title_news,u.name from comments c
+        // Смещение (для запроса)
+        $offset = ($page - 1) * $limit;
+        
+        $sql = "select c.*,n.title,u.name from comments c
               left join users u on u.id=c.id_user
               left join news n on n.id_news=c.id_news
-              where c.id_user ={$id_user} order by  c.date_time desc limit {$page},{$limit} ";
+              where c.id_user ={$id_user} AND c.is_active=1 order by  c.date_time desc limit {$limit} OFFSET {$offset} ";
         $result['comment'] = $this->pdo->query($sql);
-        $result['count_page'] = $this->getCommentCnt($id_user, $limit);
         return $result;
+    }
+
+    public function admin_get_comments($page = 1, $limit = 10)
+    {
+        $offset = ($page - 1) * $limit;
+
+
+
+        $sql="select c.id_comment, c.id_parent, u.name ,n.title, cat.category_name, c.`comment`, c.date_time, c.cnt_like, c.cnt_dislike, c.is_active from comments c
+            left join users u on u.id=c.id_user
+            left join news n on n.id_news=c.id_news
+            left join category cat on cat.category_id=n.category_id order by c.date_time desc limit {$limit} OFFSET {$offset}";
+
+        $result = $this->pdo->query($sql);
+        $res = array();
+        $i = 0;
+        while ($row = $result->fetch(\PDO::FETCH_ASSOC)){
+            $res[$i] = $row;
+            $i++;
+        }
+
+        return $res;
     }
 
     public function vote($id_comment, $type)
@@ -196,10 +202,54 @@ left join news n on n.id_news=c.id_news";
     {
         $is_active = $is_active ? 1 : 0;
         $sql = "update comments set comment='{$comment}',
-cnt_like='{$cnt_like}',
-cnt_dislike='{$cnt_dislike}',
-is_active='{$is_active}'
-where id_comment ={$id_comment}";
-        $this->pdo->query($sql);
+        cnt_like='{$cnt_like}',
+        cnt_dislike='{$cnt_dislike}',
+        is_active='{$is_active}'
+        where id_comment ={$id_comment}";
+                $this->pdo->query($sql);
     }
+
+    public function deleteCommentById($id_comment)
+    {
+        // Текст запроса к БД
+        $sql = 'DELETE FROM comments WHERE id_comment = :id_comment';
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $this->pdo->prepare($sql);
+        $result->bindParam(':id_comment', $id_comment, \PDO::PARAM_INT);
+        return $result->execute();
+    }
+
+
+    public function updateCommentsById($comment, $is_active)
+    {
+        // Текст запроса к БД
+
+        $sql = "UPDATE comment SET comment = :comment WHERE is_active = :is_active";
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $this->pdo->prepare($sql);
+        $result->bindParam(':comment', $comment, \PDO::PARAM_INT);
+        $result->bindParam(':is_active', $is_active, \PDO::PARAM_INT);
+
+        return $result->execute();
+    }
+
+    public function getActiveComment()
+    {
+        $result = $this->pdo->query("SELECT u.name, c.* FROM comments c
+        left join users u on u.id=c.id_user WHERE c.is_active=1");
+
+        return $result;
+    }
+
+    public function getNotActiveComment()
+    {
+        $result = $this->pdo->query("SELECT u.name, c.* FROM comments c
+        left join users u on u.id=c.id_user WHERE c.is_active=0");
+
+        return $result;
+    }
+
+
 }

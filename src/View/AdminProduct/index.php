@@ -23,6 +23,7 @@
                     <th>Цена</th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
                 <?php foreach ($productsList as $product): ?>
                     <tr>

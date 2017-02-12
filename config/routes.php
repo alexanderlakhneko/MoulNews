@@ -21,6 +21,7 @@ return  array(
     'user_login' => new Route('/user/login', 'User', 'login'),
     'user_logout' => new Route('/user/logout', 'User', 'logout'),
     'cabinet' => new Route('/cabinet', 'Cabinet', 'index'),
+    'comments_user' => new Route('/comments/{id}/page-{st}', 'Comments', 'index', array('id' => '[0-9]+', 'st' => '[0-9]+') ),
 
     'licks' => new Route('/ajax/list', 'News', 'listlickes'),
     // Админпанель:
@@ -44,11 +45,15 @@ return  array(
     'admin_category_create' => new Route('/admin/category/create', 'AdminCategory', 'create'),
     // Управление новостями:
     'admin_news' => new Route('/admin/news', 'AdminNews', 'index'),
-    'admin_news' => new Route('/admin/news/page-{id}', 'AdminNews', 'index', array('id' => '[0-9]+')),
+    'admin_news ' => new Route('/admin/news/page-{id}', 'AdminNews', 'index', array('id' => '[0-9]+')),
     'admin_news_delete' => new Route('/admin/news/delete/{id}', 'AdminNews', 'delete', array('id' => '[0-9]+')),
     'admin_news_update' => new Route('/admin/news/update/{id}', 'AdminNews', 'update', array('id' => '[0-9]+')),
     'admin_news_create' => new Route('/admin/news/create', 'AdminNews', 'create'),
     'admin_tags_del_from_news' => new Route('/tagsdel/{id}/{st}', 'AdminNews', 'tagsdel', array('id' => '[0-9]+', 'st' => '[0-9]+')),
+
+    'admin_comments_list' => new Route('/admin/comments/list/page-{id}', 'AdminComments', 'list', array('id' => '[0-9]+')),
+    'admin_comments_edit' => new Route('/admin/comments/edit/{id}', 'AdminComments', 'edit', array('id' => '[0-9]+')),
+    'admin_comments_del' => new Route('/admin/comments/delete/{id}', 'AdminComments', 'delete', array('id' => '[0-9]+')),
 
 
 );

@@ -27,6 +27,15 @@ abstract class Controller
         $products = $product->getProducts();
         $Admin = $this->container->get('repository_manager')->getRepository('Admin');
         $color = $Admin->admin_color();
+
+        $comments = $this->container->get('repository_manager')->getRepository('comment');
+        $products = $product->getProducts();
+
+        $menu = $this->container->get('repository_manager')->getRepository('Menu');
+        $Menus = $menu->getMenuList();
+        
+        $data['commentator']=$comments->top_commentators(5);
+        $data['themes']=$comments->getThemes(3);
         
         ob_start();
         require VIEW_DIR . self::$layout;
