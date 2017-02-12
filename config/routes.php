@@ -27,6 +27,11 @@ return  array(
     'admin' => new Route('/admin/index', 'Admin', 'index'),
     'default_admin' => new Route('/admin', 'Admin', 'index'),
     'admin_oolor' => new Route('/admin/color', 'AdminColor', 'index'),
+    // Управление товарами:
+    'admin_product' => new Route('/admin/product', 'AdminProduct', 'index'),
+    'admin_product_delete' => new Route('/admin/product/delete/{id}', 'AdminProduct', 'delete', array('id' => '[0-9]+')),
+    'admin_product_update' => new Route('/admin/product/update/{id}', 'AdminProduct', 'update', array('id' => '[0-9]+')),
+    'admin_product_create' => new Route('/admin/product/create', 'AdminProduct', 'create'),
     
 );
 

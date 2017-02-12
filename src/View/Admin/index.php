@@ -14,6 +14,8 @@
 
             <ul>
                 <li><a href="/admin/color">Управление цветом</a></li>
+                <li><a href="/admin/product">Управление рекламой</a></li>
+
             </ul>
 
         </div>
