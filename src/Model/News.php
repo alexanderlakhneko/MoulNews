@@ -19,7 +19,7 @@ class News extends EntityRepository
     public function getCategoriesList()
     {
         // Запрос к БД
-        $result = $this->pdo->query('SELECT category_id, category_name FROM category ORDER BY category_name ASC');
+        $result = $this->pdo->query('SELECT category_id, category_name FROM category ORDER BY category_id ASC');
         
         // Получение и возврат результатов
         $i = 0;
@@ -40,7 +40,7 @@ class News extends EntityRepository
     {
         // Смещение (для запроса)
         $offset = ($page - 1) * $limit;
-        
+
         // Текст запроса к БД
         $sql = 'SELECT id_news, title FROM news '
             . 'WHERE category_id = :category_id '
@@ -52,7 +52,7 @@ class News extends EntityRepository
         $result->bindParam(':limit', $limit, \PDO::PARAM_INT);
         $result->bindParam(':offset', $offset, \PDO::PARAM_INT);
 
-        
+
 
         // Выполнение коменды
         $result->execute();
@@ -65,6 +65,39 @@ class News extends EntityRepository
 
             $news[$i]['id_news'] = $row['id_news'];
             $news[$i]['title'] = $row['title'];
+            $i++;
+        }
+
+        return $news;
+    }
+
+    public function getNewsList($page = 1, $limit = News::SHOW_BY_DEFAULT)
+    {
+        // Смещение (для запроса)
+        $offset = ($page - 1) * $limit;
+
+        // Текст запроса к БД
+        $sql = 'SELECT * FROM news '
+            . 'ORDER BY id_news ASC LIMIT :limit OFFSET :offset';
+
+        // Используется подготовленный запрос
+        $result = $this->pdo->prepare($sql);
+        $result->bindParam(':limit', $limit, \PDO::PARAM_INT);
+        $result->bindParam(':offset', $offset, \PDO::PARAM_INT);
+
+
+
+        // Выполнение коменды
+        $result->execute();
+
+        // Получение и возврат результатов
+        $i = 0;
+        $news = array();
+
+        while ($row = $result->fetch()) {
+
+            $news[$i] = $row;
+            
             $i++;
         }
 
@@ -119,6 +152,18 @@ class News extends EntityRepository
         $result->execute();
 
 
+        // Возвращаем значение count - количество
+        $row = $result->fetch();
+
+        return $row['count'];
+    }
+
+    public function getTotalNews()
+    {
+        // Текст запроса к БД
+
+        $result = $this->pdo->query('SELECT count(id_news) AS `count` FROM news d');
+        
         // Возвращаем значение count - количество
         $row = $result->fetch();
 
@@ -283,6 +328,167 @@ class News extends EntityRepository
         
         return $content;
     }
-    
-    
+
+    public function deleteCategoryById($category_id)
+    {
+        // Текст запроса к БД
+        $sql = 'DELETE FROM category WHERE category_id = :category_id';
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $this->pdo->prepare($sql);
+        $result->bindParam(':category_id', $category_id, \PDO::PARAM_INT);
+        return $result->execute();
+    }
+
+
+    public function updateCategoryById($category_id, $category_name)
+    {
+        // Текст запроса к БД
+
+        $sql = "UPDATE tags SET category_name = :category_name WHERE category_id = :category_id";
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $this->pdo->prepare($sql);
+        $result->bindParam(':category_id', $category_id, \PDO::PARAM_INT);
+        $result->bindParam(':category_name', $category_name, \PDO::PARAM_INT);
+
+        return $result->execute();
+    }
+
+
+    public function createCategory($category_name)
+    {
+        // Текст запроса к БД
+        $sql = 'INSERT INTO category (category_name) VALUES (:category_name)';
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $this->pdo->prepare($sql);
+        $result->bindParam(':category_name', $category_name, \PDO::PARAM_INT);
+        if ($result->execute()) {
+            // Если запрос выполенен успешно, возвращаем id добавленной записи
+            return $this->pdo->lastInsertId();
+        }
+        // Иначе возвращаем 0
+        return 0;
+    }
+
+    public function deleteNewsById($id_news)
+    {
+        // Текст запроса к БД
+        $sql = 'DELETE FROM news WHERE id_news = :id_news';
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $this->pdo->prepare($sql);
+        $result->bindParam(':id_news', $id_news, \PDO::PARAM_INT);
+        return $result->execute();
+    }
+
+    public function updateNewsById($id, $options)
+    {
+//        // Текст запроса к БД
+//        $sql = "UPDATE news
+//            SET
+//                title = :title,
+//                content = :content,
+//                is_analitic = :is_analitic,
+//                category_id = :category_id,
+//                img = :img
+//            WHERE id = :id";
+
+//        // Получение и возврат результатов. Используется подготовленный запрос
+//        $result = $this->pdo->prepare($sql);
+//        $result->bindParam(':title', $options['title'], \PDO::PARAM_INT);
+//        $result->bindParam(':content', $options['content'], \PDO::PARAM_STR);
+//        $result->bindParam(':is_analitic', $options['is_analitic'], \PDO::PARAM_STR);
+//        $result->bindParam(':category_id', $options['category_id'], \PDO::PARAM_STR);
+//        $result->bindParam(':img', $options['img'], \PDO::PARAM_INT);
+//        $result->bindParam(':id', $id, \PDO::PARAM_STR);
+
+        // Текст запроса к БД
+        $title = $options['title'];
+        $content = $options['content'];
+        $is_analitic = $options['is_analitic'];
+        $category_id = $options['category_id'];
+        $img =  $options['img'];
+
+
+        $sql = $result = $this->pdo->query("UPDATE news Set title = '{$title}', content = '{$content}', is_analitic = '{$is_analitic}', category_id = '{$category_id}', img = '{$img}' WHERE id_news = {$id} ");
+
+        if ($result->execute()) {
+//            // Если запрос выполенен успешно, возвращаем id добавленной записи
+            return $this->pdo->lastInsertId();
+        }
+        // Иначе возвращаем 0
+        return 0;
+    }
+
+
+    public function createNews($options)
+    {
+        // Текст запроса к БД
+        $title = $options['title'];
+        $content = $options['content'];
+        $is_analitic = $options['is_analitic'];
+        $category_id = $options['category_id'];
+        $img =  $options['img'];
+
+
+        $sql = $result = $this->pdo->query("INSERT INTO news (title, content, is_analitic, category_id, img) 
+                                            VALUES ({$title}, {$content}, {$is_analitic}, {$category_id}, '{$img}')");
+
+//        // Текст запроса к БД
+//        $sql = 'INSERT INTO news '
+//            . '(title, content, is_analitic, category_id, img)'
+//            . 'VALUES '
+//            . "(:title, :content, :is_analitic, :category_id, :img)";
+
+
+//
+//        // Получение и возврат результатов. Используется подготовленный запрос
+//        $result = $this->pdo->prepare($sql);
+//        $result->bindParam(':title', $options['title'], \PDO::PARAM_INT);
+//        $result->bindParam(':content', $options['content'], \PDO::PARAM_STR);
+//        $result->bindParam(':is_analitic', $options['is_analitic'], \PDO::PARAM_STR);
+//        $result->bindParam(':category_id', $options['category_id'], \PDO::PARAM_STR);
+//        $result->bindParam(':img', $options['img'], \PDO::PARAM_INT);
+//        $result->bindParam(':id', $options['id'], \PDO::PARAM_STR);
+        if ($result->execute()) {
+//            // Если запрос выполенен успешно, возвращаем id добавленной записи
+            return $this->pdo->lastInsertId();
+        }
+        // Иначе возвращаем 0
+        return 0;
+
+    }
+
+    public function AddTegToNew($id_news, $id_tag)
+    {
+        // Текст запроса к БД
+        $sql = 'INSERT INTO tag_news '
+            . '(id_news, id_tag)'
+            . 'VALUES '
+            . '(:id_news, :id_tag)';
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $this->pdo->prepare($sql);
+        $result->bindParam(':id_news', $id_news, \PDO::PARAM_INT);
+        $result->bindParam(':id_tag', $id_tag, \PDO::PARAM_INT);
+
+        return $result->execute();
+    }
+
+    public function deleteTegFromNews($id_news, $id_tag)
+    {
+        // Текст запроса к БД
+        $sql = 'DELETE FROM tag_news WHERE id_news = :id_news AND id_tag = :id_tag';
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $this->pdo->prepare($sql);
+        $result->bindParam(':id_news', $id_news, \PDO::PARAM_INT);
+        $result->bindParam(':id_tag', $id_tag, \PDO::PARAM_INT);
+        
+        return $result->execute();
+    }
+
+
 }

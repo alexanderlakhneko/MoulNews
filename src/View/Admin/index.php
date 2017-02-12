@@ -16,6 +16,8 @@
                 <li><a href="/admin/color">Управление цветом</a></li>
                 <li><a href="/admin/product">Управление рекламой</a></li>
                 <li><a href="/admin/tags">Управление тегами новотей</a></li>
+                <li><a href="/admin/category">Управление категориями новотей</a></li>
+                <li><a href="/admin/news/page-1">Управление новостями</a></li>
 
             </ul>
 

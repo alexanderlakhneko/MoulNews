@@ -37,6 +37,19 @@ return  array(
     'admin_tags_delete' => new Route('/admin/tags/delete/{id}', 'AdminTags', 'delete', array('id' => '[0-9]+')),
     'admin_tags_update' => new Route('/admin/tags/update/{id}', 'AdminTags', 'update', array('id' => '[0-9]+')),
     'admin_tags_create' => new Route('/admin/tags/create', 'AdminTags', 'create'),
+    // Управление тегами:
+    'admin_category' => new Route('/admin/category', 'AdminCategory', 'index'),
+    'admin_category_delete' => new Route('/admin/category/delete/{id}', 'AdminCategory', 'delete', array('id' => '[0-9]+')),
+    'admin_category_update' => new Route('/admin/category/update/{id}', 'AdminCategory', 'update', array('id' => '[0-9]+')),
+    'admin_category_create' => new Route('/admin/category/create', 'AdminCategory', 'create'),
+    // Управление новостями:
+    'admin_news' => new Route('/admin/news', 'AdminNews', 'index'),
+    'admin_news' => new Route('/admin/news/page-{id}', 'AdminNews', 'index', array('id' => '[0-9]+')),
+    'admin_news_delete' => new Route('/admin/news/delete/{id}', 'AdminNews', 'delete', array('id' => '[0-9]+')),
+    'admin_news_update' => new Route('/admin/news/update/{id}', 'AdminNews', 'update', array('id' => '[0-9]+')),
+    'admin_news_create' => new Route('/admin/news/create', 'AdminNews', 'create'),
+    'admin_tags_del_from_news' => new Route('/tagsdel/{id}/{st}', 'AdminNews', 'tagsdel', array('id' => '[0-9]+', 'st' => '[0-9]+')),
+
 
 );
 
