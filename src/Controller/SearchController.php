@@ -34,7 +34,6 @@ class SearchController extends Controller
                 $result = $news->getNewsByFilter($post);
             }
             
-
         }
 
         return $this->render('Search.php', ['tags' => $tag, 'categories' => $category, 'result' => $result]);

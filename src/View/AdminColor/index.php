@@ -1,4 +1,10 @@
-<h3>Add page</h3>
+<br>
+<div class="breadcrumbs">
+    <ol class="breadcrumb">
+        <li><a href="/admin">Админпанель</a></li>
+        <li class="active">Управление цветом</li>
+    </ol>
+</div>
 <form method="post" action="" enctype="multipart/form-data">
     <div class="form-group">
         <label for="color_bg">Head</label>

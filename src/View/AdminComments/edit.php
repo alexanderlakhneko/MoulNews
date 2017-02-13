@@ -1,3 +1,13 @@
+
+<br/>
+
+<div class="breadcrumbs">
+    <ol class="breadcrumb">
+        <li><a href="/admin">Админпанель</a></li>
+        <li><a href="/admin/comments/list/page-1">Управление комментариями</a></li>
+        <li class="active">Редактировать комментарий</li>
+    </ol>
+</div>
 <form method="post" action="" >
     <input type="hidden" name="id_comment" value="<?= $data['id_comment'] ?>"/>
     <div class="form-group">

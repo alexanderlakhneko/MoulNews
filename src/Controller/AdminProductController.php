@@ -5,16 +5,11 @@ namespace Controller;
 use Library\Request;
 use Library\Router;
 
-/**
- * Контроллер AdminProductController
- * Управление товарами в админпанели
- */
+
 class AdminProductController extends AdminBase
 {
 
-    /**
-     * Action для страницы "Управление товарами"
-     */
+
     public function indexAction()
     {
         // Проверка доступа

@@ -43,7 +43,7 @@ class AdminCategoryController extends AdminBase
     }
 
     /**
-     * Action для страницы "Редактировать товар"
+     * Action для страницы "Редактировать категорию"
      */
     public function updateAction(Request $request)
     {
@@ -54,7 +54,7 @@ class AdminCategoryController extends AdminBase
 
         $categories = $this->container->get('repository_manager')->getRepository('News');
 
-        // Получаем данные о конкретном заказе
+        // Получаем данные о конкретной категории
         $category = $categories->getCategoryById($id);
 
 
@@ -67,7 +67,7 @@ class AdminCategoryController extends AdminBase
             // Сохраняем изменения
             if ($categories->updateCategoryById($id, $category_name)) {
 
-                // Перенаправляем пользователя на страницу управлениями товарами
+                // Перенаправляем пользователя на страницу управлениями категориями
                 Router::redirect("/admin/category");
             }
         }
@@ -77,7 +77,7 @@ class AdminCategoryController extends AdminBase
     }
 
     /**
-     * Action для страницы "Удалить товар"
+     * Action для страницы "Удалить категорию"
      */
     public function deleteAction(Request $request)
     {
@@ -90,10 +90,10 @@ class AdminCategoryController extends AdminBase
         // Обработка формы
         if ($request->isPost()) {
             // Если форма отправлена
-            // Удаляем товар
+            // Удаляем категорию
             $categories->deleteCategoryById($id);
 
-            // Перенаправляем пользователя на страницу управлениями товарами
+            // Перенаправляем пользователя на страницу управлениями категориями
             Router::redirect("/admin/category");
         }
 

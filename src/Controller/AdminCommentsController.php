@@ -42,7 +42,7 @@ class AdminCommentsController extends AdminBase
         return $this->render('edit.php', ['data' => $data]);
 
     }
-
+    
     public function listAction(Request $request)
     {
         $this->checkAdmin();

@@ -233,5 +233,17 @@ function setVote(type, element) {
 	});
 }
 
+$(document).ready(function () {
+	$('#read').text(randomInteger(1, 5));
+	setInterval(function () {
+		$('#read').text(randomInteger(1, 5));
+	}, 3000);
+});
+
+function randomInteger(min, max) {
+	var rand = min + Math.random() * (max + 1 - min);
+	rand = Math.floor(rand);
+	return rand;}
+
 
 

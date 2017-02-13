@@ -77,9 +77,6 @@ class AdminNewsController extends AdminBase
         return $this->render('create.php', ['categoriesList' => $categoriesList]);
     }
 
-    /**
-     * Action для страницы "Редактировать товар"
-     */
     public function updateAction(Request $request)
     {
         // Проверка доступа
@@ -92,7 +89,7 @@ class AdminNewsController extends AdminBase
         // Получаем список категорий для выпадающего списка
         $NewsList = $news->getCategoriesList();
 
-        // Получаем данные о конкретном заказе
+      
         $new = $news->getNewById($id);
 
         // Обработка формы
@@ -152,7 +149,7 @@ class AdminNewsController extends AdminBase
             // Удаляем товар
             $news->deleteNewsById($id);
 
-            // Перенаправляем пользователя на страницу управлениями товарами
+            // Перенаправляем пользователя на страницу управления
             header("Location: /admin/news/page-1");
         }
 

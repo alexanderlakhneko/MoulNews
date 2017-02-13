@@ -25,7 +25,8 @@ define('VENDOR_DIR', ROOT . 'vendor' . DS);
 require (VENDOR_DIR . 'autoload.php');
 
 try{
-    
+
+
     Session::start();
     $config = new Config();
 
@@ -41,8 +42,9 @@ try{
     $container->set('database_connection', $pdo);
     $container->set('repository_manager', $repositoryManager);
     $container->set('router', $router);
-    
+
     $router->match($request);
+    
     $route = $router->getCurrentRoute();
 
     $controller = 'Controller\\' . ucfirst($route->controller) . 'Controller';
@@ -51,8 +53,8 @@ try{
     $controller = new $controller();
     $controller->setContainer($container);
     
-    
-    
+
+
     if (!method_exists($controller, $action)) {
         throw new \Exception('Page not found', 404);
     }
@@ -60,7 +62,7 @@ try{
     $content = $controller->$action($request);
 
 } catch (\Exception $e) {
-    echo $e->getMessage();
+    Router::redirect('\\');
 }
 
 echo $content;

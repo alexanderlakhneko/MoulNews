@@ -1,7 +1,14 @@
+<br/>
 
+<div class="breadcrumbs">
+    <ol class="breadcrumb">
+        <li><a href="/admin">Админпанель</a></li>
+        <li class="active">Управление комментариями</li>
+    </ol>
+</div>
 <h6>Политические комментарии нуждаються в одобрении модератора</h6>
 <div class="table-responsive">
-    <table class="table table-striped">
+    <table class="table-bordered table-striped table">
         <thead>
         <tr>
             <th>Комментарий:</th>
@@ -12,6 +19,7 @@
             <th>Выводится:</th>
             <th>Лайков:</th>
             <th>Дизлайков:</th>
+            <th></th>
             <th></th>
         </tr>
         </thead>
@@ -27,14 +35,8 @@
                 <td><?= ($value['is_active'])? 'yes' :'no'; ?></td>
                 <td><?= $value['cnt_like'] ?></td>
                 <td><?= $value['cnt_dislike'] ?></td>
-                <td align="right">
-                    <a href="/admin/comments/edit/<?= $value['id_comment'] ?>">
-                        <button class="btn btn-sm btn-block btn-warning">edit</button>
-                    </a>
-                    <a href="/admin/comments/delete/<?= $value['id_comment'] ?>" onclick="return confirmDelete();">
-                        <button class="btn btn-sm btn-block btn-primary ">delete</button>
-                    </a>
-                </td>
+                <td><a href="/admin/comments/edit/<?= $value['id_comment'] ?>" title="Редактировать"><i class="fa fa-pencil-square-o"></i></a></td>
+                <td><a href="/admin/comments/delete/<?= $value['id_comment'] ?>" onclick="return confirmDelete();" title="Удалить"><i class="fa fa-times"></i></a></td>
             </tr>
         <?php endforeach; ?>
         <tbody>

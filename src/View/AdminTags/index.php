@@ -9,9 +9,9 @@
     </ol>
 </div>
 
-<a href="/admin/tags/create" class="btn btn-default back"><i class="fa fa-plus"></i> Добавить товар</a>
+<a href="/admin/tags/create" class="btn btn-default back"><i class="fa fa-plus"></i> Добавить тег</a>
 
-<h4>Список товаров</h4>
+<h4>Список тегов</h4>
 
 <br/>
 
@@ -19,6 +19,8 @@
     <tr>
         <th>ID тега</th>
         <th>Название тега</th>
+        <th></th>
+        <th></th>
     </tr>
     <?php foreach ($tagsList as $tag): ?>
         <tr>

@@ -16,12 +16,10 @@ class NewsController extends Controller
 {
     /**
      * Action для страницы просмотра новости
-     * @param integer $productId <p>id товара</p>
      */
     public function showAction(Request $request)
     {
-
-
+        
         $news = $this->container->get('repository_manager')->getRepository('News');
         $tags = $this->container->get('repository_manager')->getRepository('Tags');
         $comment = $this->container->get('repository_manager')->getRepository('comment');

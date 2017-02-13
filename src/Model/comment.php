@@ -69,6 +69,7 @@ class Comment extends EntityRepository
         $row = $result->fetch();
         return $row;
     }
+    
 
     public function getThemes($limit = 3)
     {
@@ -100,7 +101,7 @@ LEFT JOIN news n ON n.id_news=c.id_news";
         $sql="SELECT c.id_comment, c.id_parent, u.name ,n.title, cat.category_name, c.`comment`, c.date_time, c.cnt_like, c.cnt_dislike, c.is_active FROM comments c
             LEFT JOIN users u ON u.id=c.id_user
             LEFT JOIN news n ON n.id_news=c.id_news
-            LEFT JOIN category cat ON cat.category_id=n.category_id ORDER BY c.date_time DESC LIMIT {$limit} OFFSET {$offset}";
+            LEFT JOIN category cat ON cat.category_id=n.category_id ORDER BY c.is_active ASC, c.date_time DESC LIMIT {$limit} OFFSET {$offset}";
 
         $result = $this->pdo->query($sql);
         $res = array();

@@ -6,7 +6,7 @@
     <?php echo $new['content'] ?>
 </p>
 
-<div>Количество просмотров за последнее время: <?php echo (int)$new['visit']; ?> Читают: <?php echo $new['readers'] ?>
+<div>Количество просмотров за последнее время: <?php echo (int)$new['visit']; ?> Читают: <span id="read"></span>
 </div>
 <div>
     Теги:
@@ -29,7 +29,7 @@
     </form>
     <br>
 <?php else : ?>
-    <div style="margin-bottom: 50px;"><a href="/users/login/">Войдите</a>,чтобы оставить комментарий</div>
+    <div style="margin-bottom: 50px;"><a href="/user/login">Войдите</a>,чтобы оставить комментарий</div>
 <?php endif; ?>
 <?php if ($data['comments']['count']): ?>
 <?php    unset($data['comments']['count']);

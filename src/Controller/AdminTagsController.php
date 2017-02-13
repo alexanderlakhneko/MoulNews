@@ -8,25 +8,20 @@ use Library\Router;
 
 class AdminTagsController extends AdminBase
 {
-    /**
-     * Action для страницы "Управление тегами"
-     */
+
     public function indexAction()
     {
         // Проверка доступа
         $this->checkAdmin();
         $tags = $this->container->get('repository_manager')->getRepository('Tags');
-
-        // Получаем список товаров
+        
         $tagsList = $tags->getTagsList();
 
         // Подключаем вид
         return $this->render('index.php', ['tagsList' => $tagsList]);
     }
 
-    /**
-     * Action для страницы "Добавить товар"
-     */
+
     public function createAction(Request $request)
     {
         // Проверка доступа
@@ -49,9 +44,7 @@ class AdminTagsController extends AdminBase
         return $this->render('create.php');
     }
 
-    /**
-     * Action для страницы "Редактировать товар"
-     */
+
     public function updateAction(Request $request)
     {
         // Проверка доступа
@@ -61,7 +54,7 @@ class AdminTagsController extends AdminBase
 
         $tags = $this->container->get('repository_manager')->getRepository('Tags');
 
-        // Получаем данные о конкретном заказе
+      
         $tag = $tags->getTagById($id);
 
 
@@ -74,7 +67,7 @@ class AdminTagsController extends AdminBase
             // Сохраняем изменения
             if ($tags->updateTagById($id, $tag_name)) {
 
-                // Перенаправляем пользователя на страницу управлениями товарами
+                // Перенаправляем пользователя на страницу управления
                 Router::redirect("/admin/tags");
             }
         }
@@ -83,9 +76,7 @@ class AdminTagsController extends AdminBase
         return $this->render('update.php', ['tag' => $tag['tag_name']]);
     }
 
-    /**
-     * Action для страницы "Удалить товар"
-     */
+ 
     public function deleteAction(Request $request)
     {
         // Проверка доступа
@@ -97,10 +88,10 @@ class AdminTagsController extends AdminBase
         // Обработка формы
         if ($request->isPost()) {
             // Если форма отправлена
-            // Удаляем товар
+            // Удаляем 
             $tags->deleteTagById($id);
 
-            // Перенаправляем пользователя на страницу управлениями товарами
+            // Перенаправляем пользователя на страницу управления
             Router::redirect("/admin/tags");
         }
 

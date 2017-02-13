@@ -51,7 +51,7 @@ class AdminMenuController extends AdminBase
             $options['href'] = $request->post('href');
             
             if ($menus->createMenu($options)){
-                // Перенаправляем пользователя на страницу управлениями товарами
+                // Перенаправляем пользователя на страницу управления
                 Router::redirect("/admin/menu");
             };
 
@@ -61,9 +61,7 @@ class AdminMenuController extends AdminBase
         return $this->render('create.php' , ['menusAll' => $menusAll]);
     }
 
-    /**
-     * Action для страницы "Редактировать товар"
-     */
+   
     public function updateAction(Request $request)
     {
         // Проверка доступа
@@ -90,7 +88,7 @@ class AdminMenuController extends AdminBase
             // Сохраняем изменения
             if ($menus->updateMenuById($id, $options)) {
 
-                // Перенаправляем пользователя на страницу управлениями товарами
+                // Перенаправляем пользователя на страницу управления
                 Router::redirect("/admin/menu");
             }
 

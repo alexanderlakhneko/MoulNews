@@ -7,16 +7,9 @@ use Library\Controller;
 use Model\News;
 use Library\Pagination;
 
-/**
- * Контроллер CatalogController
- * Каталог товаров
- */
 class CatalogController extends Controller
 {
-
-    /**
-     * Action для страницы "Категория новостей"
-     */
+    
     public function categoryAction(Request $request)
     {
         $News = $this->container->get('repository_manager')->getRepository('News');
