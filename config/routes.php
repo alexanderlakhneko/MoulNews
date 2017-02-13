@@ -55,6 +55,10 @@ return  array(
     'admin_comments_edit' => new Route('/admin/comments/edit/{id}', 'AdminComments', 'edit', array('id' => '[0-9]+')),
     'admin_comments_del' => new Route('/admin/comments/delete/{id}', 'AdminComments', 'delete', array('id' => '[0-9]+')),
 
+    'admin_menu' => new Route('/admin/menu', 'AdminMenu', 'index'),
+    'admin_menu_delete' => new Route('/admin/menu/delete/{id}', 'AdminMenu', 'delete', array('id' => '[0-9]+')),
+    'admin_menu_update' => new Route('/admin/menu/update/{id}', 'AdminMenu', 'update', array('id' => '[0-9]+')),
+    'admin_menu_create' => new Route('/admin/menu/create', 'AdminMenu', 'create'),
 
 );
 

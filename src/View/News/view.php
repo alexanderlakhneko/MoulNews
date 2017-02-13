@@ -33,52 +33,7 @@
 <?php endif; ?>
 <?php if ($data['comments']['count']): ?>
 <?php    unset($data['comments']['count']);
-    function array_rec($comment, $level = 0)
-    {
-        static $result;
-        $result .= '<div id="huita_here"></div>';
-        foreach ($comment as $item => $value) {
-            if ($level == 1) {
-                $result .= "<div class='panel panel2 panel-info' style='margin-left: 80px;'>";
-            } else {
-                $result .= "<div class='panel panel2 panel-info'>";
-            }
-            $result .= "<div class='panel-heading'>";
-            $result .= "<h3 class='panel-title'>";
-            $result .= "Name: <a>{$value['name']}</a>";
-            $result .= " Time: {$value['date_time']} </h3> </div>";
-            $result .= "<div class='panel-body'>{$value['comment']}</div>";
-            $result .= "<div class='panel-footer' style='padding: 4px 15px; overflow: hidden;'>";
-            if (Session::get('user') && $level == 0) {
-                $result .= "<div style='float: left'>";
-                $result .= "<a id='answer'>Ответить</a></div>";
-            }
-            $result .= "<div style='float: right'>";
-            $result .= "<input type='hidden' id='id_comment' value='{$value['id_comment']}'>";
-            $result .= "<input type='hidden' id='id_user' value='{$value['id_user']}'>";
-            $result .= "<button type='button' id='like' class='btn btn-default btn-xs'>
-                        Like:<span class='glyphicon glyphicon-thumbs-up'
-                             aria-hidden='true'>{$value['cnt_like']}</span>
-                     </button>";
-            $result .= "<button type='button' id='dislike' class='btn btn-default btn-xs'>
-                        Like:<span class='glyphicon glyphicon-thumbs-down'
-                             aria-hidden='true'>{$value['cnt_dislike']}</span>
-                     </button>";
-            $result .= "</div></div></div>";
-            if (isset($value['childs'])) {
-//                $result.="</div>";
-                $level++;
-                
-                array_rec($value['childs'], $level);
 
-                $level = 0;
-            } else {
-//                $result.= "</div>";
-            }
-        }
-        return $result;
-    }
-
-    $comment = array_rec($data['comments']);
+    $comment = $comments->CommentsShow($data['comments']);
     echo $comment; ?>
 <?php endif; ?>

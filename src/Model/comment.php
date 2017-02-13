@@ -12,13 +12,13 @@ class Comment extends EntityRepository
     public function getCommentById($id_comment)
     {
         $result = $this->pdo->query("SELECT u.name, c.* FROM comments c
-        left join users u on u.id=c.id_user
-        where id_comment='{$id_comment}'");
+        LEFT JOIN users u ON u.id=c.id_user
+        WHERE id_comment='{$id_comment}'");
 
         return $result;
     }
     public function admin_edit_comment($id){
-        $sql="select * from comments where id_comment={$id}";
+        $sql="SELECT * FROM comments WHERE id_comment={$id}";
         $row = $this->pdo->query($sql);
 
         return $row->fetch();
@@ -27,8 +27,8 @@ class Comment extends EntityRepository
     public function get_comments($id_news)
     {
         $sql = "SELECT u.name, c.* FROM comments c
-        left join users u on u.id=c.id_user
-        where id_news='{$id_news}' and c.is_active=1 order by id_parent,date_time desc";
+        LEFT JOIN users u ON u.id=c.id_user
+        WHERE id_news='{$id_news}' AND c.is_active=1 ORDER BY id_parent,date_time DESC";
         $result = $this->pdo->query($sql);
         $i = 0;
         foreach ($result as $key => $value) {
@@ -45,7 +45,7 @@ class Comment extends EntityRepository
     }
     
     public function cnt_comments(){
-            $sql = "select count(*) as COUNT from comments";
+            $sql = "SELECT count(*) AS COUNT FROM comments";
             $count_news = $this->pdo->query($sql);
             $row = $count_news->fetch();
             $total_rows = ($row['COUNT']);
@@ -55,16 +55,16 @@ class Comment extends EntityRepository
 
     public function top_commentators($limit = 5)
     {
-        $sql = "select c.*,count(*) as cnt,u.name from comments c
-              left join users u on u.id=c.id_user
-              group by c.id_user order by cnt desc
+        $sql = "SELECT c.*,count(*) AS cnt,u.name FROM comments c
+              LEFT JOIN users u ON u.id=c.id_user
+              GROUP BY c.id_user ORDER BY cnt DESC
               limit {$limit}";
         return $this->pdo->query($sql);
     }
 
     public function getCommentCnt($id_user)
     {
-        $sql = "select count(*) as cnt from comments where id_user={$id_user}";
+        $sql = "SELECT count(*) AS cnt FROM comments WHERE id_user={$id_user}";
         $result = $this->pdo->query($sql);
         $row = $result->fetch();
         return $row;
@@ -73,9 +73,9 @@ class Comment extends EntityRepository
     public function getThemes($limit = 3)
     {
 
-        $sql = "select c.*,n.title from (select max(date_time) datet,id_news from comments 
-group by id_news limit {$limit}) c
-left join news n on n.id_news=c.id_news";
+        $sql = "SELECT c.*,n.title FROM (SELECT max(date_time) datet,id_news FROM comments 
+GROUP BY id_news limit {$limit}) c
+LEFT JOIN news n ON n.id_news=c.id_news";
         return $this->pdo->query($sql);
 
     }
@@ -85,10 +85,10 @@ left join news n on n.id_news=c.id_news";
         // Смещение (для запроса)
         $offset = ($page - 1) * $limit;
         
-        $sql = "select c.*,n.title,u.name from comments c
-              left join users u on u.id=c.id_user
-              left join news n on n.id_news=c.id_news
-              where c.id_user ={$id_user} AND c.is_active=1 order by  c.date_time desc limit {$limit} OFFSET {$offset} ";
+        $sql = "SELECT c.*,n.title,u.name FROM comments c
+              LEFT JOIN users u ON u.id=c.id_user
+              LEFT JOIN news n ON n.id_news=c.id_news
+              WHERE c.id_user ={$id_user} AND c.is_active=1 ORDER BY  c.date_time DESC limit {$limit} OFFSET {$offset} ";
         $result['comment'] = $this->pdo->query($sql);
         return $result;
     }
@@ -97,12 +97,10 @@ left join news n on n.id_news=c.id_news";
     {
         $offset = ($page - 1) * $limit;
 
-
-
-        $sql="select c.id_comment, c.id_parent, u.name ,n.title, cat.category_name, c.`comment`, c.date_time, c.cnt_like, c.cnt_dislike, c.is_active from comments c
-            left join users u on u.id=c.id_user
-            left join news n on n.id_news=c.id_news
-            left join category cat on cat.category_id=n.category_id order by c.date_time desc limit {$limit} OFFSET {$offset}";
+        $sql="SELECT c.id_comment, c.id_parent, u.name ,n.title, cat.category_name, c.`comment`, c.date_time, c.cnt_like, c.cnt_dislike, c.is_active FROM comments c
+            LEFT JOIN users u ON u.id=c.id_user
+            LEFT JOIN news n ON n.id_news=c.id_news
+            LEFT JOIN category cat ON cat.category_id=n.category_id ORDER BY c.date_time DESC LIMIT {$limit} OFFSET {$offset}";
 
         $result = $this->pdo->query($sql);
         $res = array();
@@ -123,8 +121,8 @@ left join news n on n.id_news=c.id_news";
         }
         $user = Session::get('user');
 
-        $sql = "Select v.*,u.name from votes_comment v
-        left join users u on u.id=v.id_user where id_comment={$id_comment} and
+        $sql = "SELECT v.*,u.name FROM votes_comment v
+        LEFT JOIN users u on u.id=v.id_user WHERE id_comment={$id_comment} AND
          u.id = '{$user}'";
         $result = $this->pdo->query($sql);
         $i = 0;
@@ -157,8 +155,8 @@ left join news n on n.id_news=c.id_news";
 
     public function check_comment($id_news)
     {
-        $sql = "select n.id_news from news n
-        where n.id_news={$id_news} and n.category_id=5 limit 1";
+        $sql = "SELECT n.id_news FROM news n
+        WHERE n.id_news={$id_news} AND n.category_id=5 limit 1";
         $result = $this->pdo->query($sql);
         $row = $result->fetch();
         if (empty($row)) {
@@ -174,7 +172,7 @@ left join news n on n.id_news=c.id_news";
             $id_parent = 0;
         }
         $is_active = $this->check_comment($id_news);
-        $sql_user = "select id,`name` from users where name like '%{$id_user}%'";
+        $sql_user = "SELECT id,`name` FROM users WHERE name LIKE '%{$id_user}%'";
         $comment = htmlspecialchars($this->pdo->quote($comment));
         $result = $this->pdo->query($sql_user);
         $row = $result->fetch();
@@ -183,8 +181,8 @@ left join news n on n.id_news=c.id_news";
         }
 
         $sql = "
-            insert into comments
-            set id_user='{$id_user}',
+            INSERT INTO comments
+            SET id_user='{$id_user}',
                 id_news='{$id_news}',
                 comment={$comment},
                 id_parent='{$id_parent}',
@@ -201,11 +199,11 @@ left join news n on n.id_news=c.id_news";
     public function change_comment($id_comment, $comment,$cnt_like,$cnt_dislike,$is_active)
     {
         $is_active = $is_active ? 1 : 0;
-        $sql = "update comments set comment='{$comment}',
+        $sql = "UPDATE comments SET comment='{$comment}',
         cnt_like='{$cnt_like}',
         cnt_dislike='{$cnt_dislike}',
         is_active='{$is_active}'
-        where id_comment ={$id_comment}";
+        WHERE id_comment ={$id_comment}";
                 $this->pdo->query($sql);
     }
 
@@ -248,6 +246,51 @@ left join news n on n.id_news=c.id_news";
         $result = $this->pdo->query("SELECT u.name, c.* FROM comments c
         left join users u on u.id=c.id_user WHERE c.is_active=0");
 
+        return $result;
+    }
+    
+    public function CommentsShow($comment, $level2 = 0)
+    {
+        static $result;
+
+
+        foreach ( $comment as $item => $value) {
+            if ($level2 == 1) {
+                $result .= "<div class='panel panel2 panel-info' style='margin-left: 80px;'>";
+            } else {
+                $result .= "<div class='panel panel2 panel-info'>";
+            }
+            $result .= "<div class='panel-heading'>";
+            $result .= "<h3 class='panel-title'>";
+            $result .= "Name: <a>{$value['name']}</a>";
+            $result .= " Time: {$value['date_time']} </h3> </div>";
+            $result .= "<div class='panel-body'>{$value['comment']}</div>";
+            $result .= "<div class='panel-footer' style='padding: 4px 15px; overflow: hidden;'>";
+            if (Session::get('user') && $level2 == 0) {
+                $result .= "<div style='float: left'>";
+                $result .= "<a id='answer'>Ответить</a></div>";
+            }
+            $result .= "<div style='float: right'>";
+            $result .= "<input type='hidden' id='id_comment' value='{$value['id_comment']}'>";
+            $result .= "<input type='hidden' id='id_user' value='{$value['id_user']}'>";
+            $result .= "<button type='button' id='like' class='btn btn-default btn-xs'>
+                        Like:<span class='glyphicon glyphicon-thumbs-up'
+                             aria-hidden='true'>{$value['cnt_like']}</span>
+                     </button>";
+            $result .= "<button type='button' id='dislike' class='btn btn-default btn-xs'>
+                        Like:<span class='glyphicon glyphicon-thumbs-down'
+                             aria-hidden='true'>{$value['cnt_dislike']}</span>
+                     </button>";
+            $result .= "</div></div></div>";
+            if (isset($value['childs'])) {
+
+                $level2++;
+
+                $this->CommentsShow($value['childs'], $level2);
+
+                $level2 = 0;
+            }
+        }
         return $result;
     }
 

@@ -19,6 +19,7 @@
                 <li><a href="/admin/category">Управление категориями новотей</a></li>
                 <li><a href="/admin/news/page-1">Управление новостями</a></li>
                 <li><a href="/admin/comments/list/page-1">Управление комментариями</a></li>
+                <li><a href="/admin/menu">Управление пунктами меню</a></li>
 
 
             </ul>
